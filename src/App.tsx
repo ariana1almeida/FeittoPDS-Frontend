@@ -1,5 +1,5 @@
-import Register from "./pages/Register/Register";
+import RegisterPage from "./assets/pages/RegisterPage";
 
 export default function App() {
-  return <Register />;
+  return <RegisterPage />;
 }

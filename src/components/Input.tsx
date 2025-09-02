@@ -22,7 +22,10 @@ export default function Input({
   return (
     <div className="mb-4">
       {label && (
-        <label htmlFor={name} className="mb-1 block text-sm font-medium">
+        <label
+          htmlFor={name}
+          className="mb-2 block text-sm font-medium text-gray-700"
+        >
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
         </label>
@@ -34,11 +37,11 @@ export default function Input({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className={`border p-2 w-full rounded ${
+        className={`w-full px-4 py-3 rounded-lg transition-all duration-200 ${
           error
-            ? "border-red-500 bg-red-50 focus:border-red-500 focus:ring-red-500"
-            : "border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-        } focus:outline-none focus:ring-2`}
+            ? "bg-red-50 border-2 border-red-300 focus:border-red-500 focus:ring-2 focus:ring-red-200"
+            : "bg-stone-200 border-2 border-transparent focus:bg-white focus:border-amber-600 focus:ring-2 focus:ring-amber-100"
+        } text-gray-900 placeholder-gray-500 focus:outline-none`}
       />
     </div>
   );
