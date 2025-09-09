@@ -1,4 +1,5 @@
 import Input from "../Input";
+import FormSection from "../FormSection";
 import type { FormData } from "../../types/form";
 
 interface PersonalInfoFormProps {
@@ -13,7 +14,7 @@ export default function PersonalInfoForm({
   showValidation,
 }: PersonalInfoFormProps) {
   return (
-    <div>
+    <FormSection>
       <Input
         name="firstName"
         value={formData.firstName}
@@ -66,6 +67,6 @@ export default function PersonalInfoForm({
         required
         error={showValidation && !formData.password.trim()}
       />
-    </div>
+    </FormSection>
   );
 }
