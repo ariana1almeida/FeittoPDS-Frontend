@@ -24,10 +24,10 @@ export default function Input({
       {label && (
         <label
           htmlFor={name}
-          className="mb-2 block text-sm font-medium text-gray-700"
+          className="mb-2 block text-sm font-medium text-primary-dark"
         >
           {label}
-          {required && <span className="text-red-500 ml-1">*</span>}
+          {required && <span className="text-status-error ml-1">*</span>}
         </label>
       )}
       <input
@@ -37,11 +37,11 @@ export default function Input({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className={`w-full px-4 py-3 rounded-lg transition-all duration-200 ${
+        className={`w-full px-4 py-2 rounded-lg transition-all duration-200 ${
           error
-            ? "bg-red-50 border-2 border-red-300 focus:border-red-500 focus:ring-2 focus:ring-red-200"
-            : "bg-stone-200 border-2 border-transparent focus:bg-white focus:border-amber-600 focus:ring-2 focus:ring-amber-100"
-        } text-gray-900 placeholder-gray-500 focus:outline-none`}
+            ? "bg-red-50 border-2 border-status-error focus:border-status-error focus:ring-2 focus:ring-status-error/20"
+            : "bg-neutral-light border-2 border-transparent focus:bg-white focus:border-accent-yellow focus:ring-2 focus:ring-accent-yellow/20"
+        } text-primary-dark placeholder-neutral-dark/60 focus:outline-none`}
       />
     </div>
   );

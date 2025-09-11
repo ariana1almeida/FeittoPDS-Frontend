@@ -1,4 +1,5 @@
 import RadioGroup from "../RadioGroup";
+import FormSection from "../FormSection";
 import type { UserType } from "../../types/form";
 
 interface UserTypeSelectorProps {
@@ -11,11 +12,7 @@ export default function UserTypeSelector({
   onChange,
 }: UserTypeSelectorProps) {
   return (
-    <div>
-      <h2 className="text-xl font-semibold mb-4 text-gray-800">
-        Tipo de Conta
-      </h2>
-
+    <FormSection title="Tipo de Conta">
       <RadioGroup
         name="userType"
         selected={selectedType}
@@ -25,6 +22,6 @@ export default function UserTypeSelector({
           { label: "Prestador", value: "PROVIDER" },
         ]}
       />
-    </div>
+    </FormSection>
   );
 }

@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+@theme {
+  --color-primary-dark: #20124D;
+  --color-primary-medium: #3B2A72;
+  --color-accent-yellow: #FCC010;
+  --color-accent-yellow-hover: #FFD23F;
+  --color-neutral-dark: #333333;
+  --color-neutral-light: #F5F5F5;
+  --color-status-success: #28A745;
+  --color-status-error: #E63946;
+}
+
 html, body {
   overflow-x: hidden;
   width: 100%;

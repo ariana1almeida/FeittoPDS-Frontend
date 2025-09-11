@@ -1,6 +1,8 @@
+export type UserType = "CLIENT" | "PROVIDER";
+
 export interface ClientData {
   street: string;
-  houseNumber: string | number;
+  houseNumber: number | string;
   reference: string;
   neighborhood: string;
   city: string;
@@ -13,17 +15,6 @@ export interface ProviderData {
   city: string;
   state: string;
 }
-
-export interface PersonalData {
-  firstName: string;
-  lastName: string;
-  fullName: string;
-  email: string;
-  phone: string;
-  password: string;
-}
-
-export type UserType = "CLIENT" | "PROVIDER";
 
 export interface FormData {
   firstName: string;
