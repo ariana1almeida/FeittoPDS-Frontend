@@ -24,7 +24,11 @@ export default function LoginForm() {
       setError("Email ou senha inválidos");
       return;
     }
-    window.location.hash = "#/home";
+    window.location.hash = "#/";
+  };
+
+  const navigateTo = (path: string) => {
+    window.location.hash = path;
   };
 
   return (
@@ -68,12 +72,12 @@ export default function LoginForm() {
         </form>
         <p className="text-center text-sm text-neutral-dark mt-6">
           Não possui conta?{" "}
-          <a
-              href="#/register"
-              className="text-primary-medium font-medium hover:underline"
+          <button
+              onClick={() => navigateTo('/register')}
+              className="text-primary-medium font-medium hover:underline bg-transparent border-none cursor-pointer"
           >
             Cadastre-se
-          </a>
+          </button>
         </p>
       </div>
   );
