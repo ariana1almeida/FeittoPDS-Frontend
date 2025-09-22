@@ -14,7 +14,7 @@ export const PROFESSIONS: string[] = [
   "CARPENTER",
   "PAINTER",
   "MASON",
-  "OTHER",
+  "OTHERS",
 ];
 
 export const PROFESSION_LABELS: Record<string, string> = {
@@ -23,11 +23,17 @@ export const PROFESSION_LABELS: Record<string, string> = {
   CARPENTER: "Carpinteiro", 
   PAINTER: "Pintor",
   MASON: "Pedreiro",
-  OTHER: "Outros",
+  OTHERS: "Outros",
 };
 
 export const getProfessionOptions = () => 
   PROFESSIONS.map(profession => ({
     value: profession,
     label: PROFESSION_LABELS[profession] || profession
+  }));
+
+export const getServiceCategoryOptions = () => 
+  Object.entries(PROFESSION_LABELS).map(([value, label]) => ({
+    value,
+    label,
   }));
