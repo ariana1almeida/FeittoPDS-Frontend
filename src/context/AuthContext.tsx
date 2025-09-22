@@ -6,10 +6,23 @@ interface AuthData {
   refreshToken: string;
   expiresAt: number;
   uid: string;
+  userType: "CLIENT" | "PROVIDER";
+  user: {
+    id: number;
+    firstName: string;
+    lastName: string;
+    userType: "CLIENT" | "PROVIDER";
+  };
 }
 
 interface AuthContextType {
-  user: { uid: string } | null;
+  user: {
+    uid: string;
+    id: number;
+    firstName: string;
+    lastName: string;
+    userType: "CLIENT" | "PROVIDER";
+  } | null;
   token: string | null;
   loading: boolean;
   login: (email: string, password: string) => Promise<boolean>;
@@ -43,13 +56,26 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const login = useCallback(async (email: string, password: string) => {
     try {
       const res = await api.post("/login", { email, password });
-      const { token, refreshToken, expiresIn, uid } = res.data as {
-        token: string; refreshToken: string; expiresIn: string; uid: string;
+      const { token, refreshToken, expiresIn, uid, userType, redirectUrl, user } = res.data as {
+        token: string;
+        refreshToken: string;
+        expiresIn: string;
+        uid: string;
+        userType: "CLIENT" | "PROVIDER";
+        redirectUrl: string;
+        user: {
+          id: number;
+          firstName: string;
+          lastName: string;
+          userType: "CLIENT" | "PROVIDER";
+        };
       };
       const expiresAt = Date.now() + parseInt(expiresIn, 10) * 1000;
-      const authData: AuthData = { token, refreshToken, uid, expiresAt };
+      const authData: AuthData = { token, refreshToken, uid, expiresAt, userType, user };
       setData(authData);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(authData));
+      window.location.hash = redirectUrl;
+
       return true;
     } catch{
       return false;
@@ -59,13 +85,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const logout = useCallback(() => {
     setData(null);
     localStorage.removeItem(STORAGE_KEY);
-    window.location.hash = "#/login";
+    window.location.hash = "#/";
   }, []);
 
   return (
     <AuthContext.Provider
       value={{
-        user: data ? { uid: data.uid } : null,
+        user: data ? {
+          uid: data.uid,
+          id: data.user.id,
+          firstName: data.user.firstName,
+          lastName: data.user.lastName,
+          userType: data.user.userType
+        } : null,
         token: data?.token || null,
         loading,
         login,
@@ -76,4 +108,3 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     </AuthContext.Provider>
   );
 };
-

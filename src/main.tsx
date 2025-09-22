@@ -1,8 +1,8 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import App from "./App";
 import "./index.css";
-import { AuthProvider } from "./context/AuthContext";
+import App from "./App.tsx";
+import { AuthProvider } from "./context/AuthContext.tsx";
 
 const container = document.getElementById("root");
 if (container) {
