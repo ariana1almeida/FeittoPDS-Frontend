@@ -1,64 +1,79 @@
-import {type JSX, useEffect, useState} from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
-import {HomePage} from "./pages/HomePage";
+import { HomePage } from "./pages/HomePage";
 import RegisterPage from "./pages/RegisterPage";
 import ClientHomePage from "./pages/ClientHomePage";
 import ProviderHomePage from "./pages/ProviderHomePage";
+import { AuthProvider } from "./context/AuthContext";
 import { useAuth } from "./hooks/useAuth";
 
 export default function App() {
-  const {user, loading} = useAuth();
-  const [route, setRoute] = useState<string>(
-      typeof window !== "undefined" && window.location.hash
-          ? window.location.hash.replace("#", "")
-          : "/"
-  );
-
-  useEffect(() => {
-    const handler = () => setRoute(window.location.hash.replace("#", "") || "/");
-    window.addEventListener("hashchange", handler);
-    return () => window.removeEventListener("hashchange", handler);
-  }, []);
-
-  useEffect(() => {
-    if (!loading && user && route === "/") {
-      const redirectPath = user.userType === "CLIENT" ? "/cliente/home" : "/prestador/home";
-      window.location.hash = redirectPath;
-      setRoute(redirectPath);
-    }
-  }, [user, loading, route]);
-
-  if (loading) {
     return (
-        <div
-            className="min-h-screen flex items-center justify-center bg-neutral-light text-primary-dark">Carregando...</div>
+        <HashRouter>
+            <AuthProvider>
+                <AppContent />
+            </AuthProvider>
+        </HashRouter>
     );
-  }
+}
 
-  let element: JSX.Element;
-  switch (route) {
-    case "/":
-      if (user) {
-        element = user.userType === "CLIENT" ? <ClientHomePage/> : <ProviderHomePage/>;
-      } else {
-        element = <HomePage/>;
-      }
-      break;
-    case "/login":
-      element = <LoginPage/>;
-      break;
-    case "/register":
-      element = <RegisterPage/>;
-      break;
-    case "/cliente/home":
-      element = user && user.userType === "CLIENT" ? <ClientHomePage/> : <LoginPage/>;
-      break;
-    case "/prestador/home":
-      element = user && user.userType === "PROVIDER" ? <ProviderHomePage/> : <LoginPage/>;
-      break;
-    default:
-      element = <HomePage/>;
-  }
+function AppContent() {
+    function ProtectedRoute({ children }: { children: React.ReactNode; userType?: "CLIENT" | "PROVIDER" }) {
+        console.log("UserType value qlqr coisa",children);
+        const { loading, authData } = useAuth();
 
-  return element;
+        if (loading) {
+            return <div className="min-h-screen flex items-center justify-center bg-neutral-light text-primary-dark">Carregando...</div>;
+        }
+
+        if (!authData) {
+            return <Navigate to="/login" replace />;
+        }
+
+        // if (authData?.userType !== userType) {
+        //     return <Navigate to="/login" replace />;
+        // }
+
+        return <>{children}</>;
+    }
+
+    function HomeRedirect() {
+        const { authData, loading } = useAuth();
+
+        if (loading) {
+            return <div className="min-h-screen flex items-center justify-center bg-neutral-light text-primary-dark">Carregando...</div>;
+        }
+
+        if (authData?.userType) {
+            return <Navigate to={authData.userType === "CLIENT" ? "/client/home" : "/provider/home"} replace />;
+        }
+
+        return <HomePage />;
+    }
+
+    return (
+        <Routes>
+            <Route path="/" element={<HomeRedirect />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route
+                path="/client/home"
+                element={
+                    <ProtectedRoute userType="CLIENT">
+                        <ClientHomePage />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/provider/home"
+                element={
+                    <ProtectedRoute userType="PROVIDER">
+                        <ProviderHomePage />
+                    </ProtectedRoute>
+                }
+            />
+            <Route path="*" element={<HomePage />} />
+        </Routes>
+    );
 }

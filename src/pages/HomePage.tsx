@@ -1,13 +1,13 @@
 import { useAuth } from "../hooks/useAuth";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import SearchBar from "../components/SearchBar";
+import Header from "../components/common/Header.tsx";
+import Footer from "../components/common/Footer.tsx";
+import SearchBar from "../components/common/SearchBar.tsx";
 import ClientHomePage from "./ClientHomePage";
 import ProviderHomePage from "./ProviderHomePage";
 import {DevicesIcon, HandshakeIcon, StarIcon} from "@phosphor-icons/react";
 
 export function HomePage() {
-    const {user} = useAuth();
+    const {authData} = useAuth();
 
     const handleSearch = (query: string) => {
         console.log('Pesquisando por:', query);
@@ -28,7 +28,7 @@ export function HomePage() {
                 />
 
                 <div className="mt-4 text-white flex flex-col items-center">
-                    {!user ? (
+                    {!authData ? (
                         <div className="max-w-4xl w-full space-y-8">
                             <div className="bg-neutral-light rounded-lg p-8 shadow-lg text-center">
                                 <h1 className="text-3xl text-primary-dark font-bold mb-4">
@@ -96,9 +96,9 @@ export function HomePage() {
                         </div>
                     ) : (
                         <>
-                            {user.userType === "CLIENT" && <ClientHomePage/>}
-                            {user.userType === "PROVIDER" && <ProviderHomePage/>}
-                            {!user.userType && (
+                            {authData.userType === "CLIENT" && <ClientHomePage/>}
+                            {authData.userType === "PROVIDER" && <ProviderHomePage/>}
+                            {!authData.userType && (
                                 <div className="max-w-md w-full bg-neutral-light rounded-lg p-6 shadow-lg">
                                     <h1 className="text-2xl text-primary-dark font-bold mb-4">Bem-vindo!</h1>
                                     <p className="mb-6 text-primary-dark text-sm">

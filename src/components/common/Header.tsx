@@ -1,8 +1,8 @@
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../../hooks/useAuth.ts';
 import { useState } from 'react';
 
 export default function Header() {
-  const { user, logout } = useAuth();
+  const { authData, logout } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -17,7 +17,7 @@ export default function Header() {
     <header className="w-full flex items-center justify-between px-6 py-4 bg-neutral-light shadow">
       <div className="text-2xl font-bold text-neutral-900">FEITTO</div>
 
-      {!user ? (
+      {!authData ? (
         <div className="flex items-center gap-4">
           <button
             onClick={() => navigateTo('/login')}
