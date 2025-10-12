@@ -1,6 +1,6 @@
 import LoginForm from "../components/auth/LoginForm";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../components/common/Header.tsx";
+import Footer from "../components/common/Footer.tsx";
 
 export default function LoginPage() {
   return (

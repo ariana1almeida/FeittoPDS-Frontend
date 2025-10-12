@@ -1,11 +1,11 @@
-import Input from "../Input";
-import FormSection from "../FormSection";
-import CustomSelect from "../CustomSelect";
-import type { ProviderData } from "../../types/form";
+import Input from "../common/Input.tsx";
+import FormSection from "../common/FormSection.tsx";
+import CustomSelect from "../common/CustomSelect.tsx";
+import type { FormData } from "../../types/form";
 import { CITIES, STATES, getProfessionOptions } from "../../constants/formData";
 
 interface ProviderFormProps {
-  formData: ProviderData;
+  formData: FormData;
   onChange: (
       e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
@@ -21,12 +21,12 @@ export default function ProviderForm({
       <FormSection title="Dados Profissionais">
         <CustomSelect
             label="Profissão"
-            name="profession"
-            value={formData.profession}
+            name="providerData.profession"
+            value={formData.providerData.profession}
             options={getProfessionOptions()}
             placeholder="Selecione a profissão"
             onChange={onChange}
-            error={showValidation && !formData.profession}
+            error={showValidation && !formData.providerData.profession}
         />
 
         <Input

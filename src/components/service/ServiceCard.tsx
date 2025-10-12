@@ -1,9 +1,9 @@
-import type { Service } from "../services/serviceService";
-import { PROFESSION_LABELS } from "../constants/formData";
+import { PROFESSION_LABELS } from "../../constants/formData.ts";
 import {EyeIcon, TrashIcon} from "@phosphor-icons/react";
+import type {ServiceEntity} from "../../types/ServiceEntity.ts";
 
 interface ServiceCardProps {
-  service: Service;
+  service: ServiceEntity;
   onView: (serviceId: string) => void;
   onDelete: (serviceId: string) => void;
   onViewProposals: (serviceId: string) => void;
@@ -54,8 +54,8 @@ const ServiceCard = ({
       <div className="flex gap-4">
         <div className="flex-shrink-0">
           <img
-            src={service.foto}
-            alt={service.titulo}
+            src={service.picture}
+            alt={service.title}
             className="w-16 h-16 object-cover rounded-lg"
             onError={(e) => {
               const target = e.target as HTMLImageElement;
@@ -67,7 +67,7 @@ const ServiceCard = ({
         <div className="flex-1 min-w-0">
           <div className="flex justify-between items-start mb-2">
             <h3 className="text-lg font-semibold text-gray-800 truncate">
-              {service.titulo}
+              {service.title}
             </h3>
             <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(service.status)}`}>
               {getStatusLabel(service.status)}
@@ -75,12 +75,12 @@ const ServiceCard = ({
           </div>
 
           <p className="text-sm text-gray-600 mb-2 line-clamp-2">
-            {service.descricao}
+            {service.description}
           </p>
 
           <div className="flex justify-between items-center text-sm text-gray-500">
             <span className="bg-gray-100 px-2 py-1 rounded">
-              {PROFESSION_LABELS[service.categoria] || service.categoria}
+              {PROFESSION_LABELS[service.category] || service.category}
             </span>
             <span>
               {formatDate(service.createdAt)}

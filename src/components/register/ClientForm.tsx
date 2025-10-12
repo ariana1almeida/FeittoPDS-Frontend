@@ -1,11 +1,11 @@
-import Input from "../Input";
-import FormSection from "../FormSection";
-import type { ClientData } from "../../types/form";
-import CustomSelect from "../CustomSelect";
+import Input from "../common/Input.tsx";
+import FormSection from "../common/FormSection.tsx";
+import type { FormData } from "../../types/form";
+import CustomSelect from "../common/CustomSelect.tsx";
 import { CITIES, STATES } from "../../constants/formData";
 
 interface ClientFormProps {
-    formData: ClientData;
+    formData: FormData;
     onChange: (
         e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
     ) => void;
@@ -20,31 +20,31 @@ export default function ClientForm({
     return (
         <FormSection title="Dados do Endereço">
             <Input
-                name="street"
+                name="clientData.street"
                 label="Rua"
                 placeholder="Rua"
-                value={formData.street}
+                value={formData.clientData.street}
                 onChange={onChange}
                 required
-                error={showValidation && !formData.street.trim()}
+                error={showValidation && !formData.clientData.street.trim()}
             />
 
             <Input
-                name="houseNumber"
+                name="clientData.houseNumber"
                 type="number"
                 label="Número da Casa"
                 placeholder="Número da Casa"
-                value={formData.houseNumber}
+                value={formData.clientData.houseNumber}
                 onChange={onChange}
                 required
-                error={showValidation && !formData.houseNumber}
+                error={showValidation && !formData.clientData.houseNumber}
             />
 
             <Input
-                name="reference"
+                name="clientData.reference"
                 label="Referência"
                 placeholder="Referência"
-                value={formData.reference}
+                value={formData.clientData.reference}
                 onChange={onChange}
             />
 

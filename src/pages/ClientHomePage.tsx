@@ -1,38 +1,40 @@
 import { useState, useEffect, useCallback } from "react";
-import Header from "../components/Header.tsx";
-import SearchBar from "../components/SearchBar.tsx";
-import Footer from "../components/Footer.tsx";
-import CreateServiceModal from "../components/CreateServiceModal.tsx";
-import ServiceCard from "../components/ServiceCard.tsx";
+import Header from "../components/common/Header.tsx";
+import SearchBar from "../components/common/SearchBar.tsx";
+import Footer from "../components/common/Footer.tsx";
+import CreateServiceModal from "../components/service/CreateServiceModal.tsx";
+import ServiceCard from "../components/service/ServiceCard.tsx";
 import { useAuth } from "../hooks/useAuth.ts";
-import { createService, getServicesByClient, deleteService, type Service } from "../services/serviceService.ts";
+import { ServiceService } from "../services/ServiceService.ts";
+import type {ServiceEntity} from "../types/ServiceEntity.ts";
 
 export default function ClientHomePage() {
-  const { user } = useAuth();
+  const serviceService = ServiceService.getInstance();
+  const { authData } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [services, setServices] = useState<Service[]>([]);
+  const [services, setServices] = useState<ServiceEntity[]>([]);
   const [loading, setLoading] = useState(false);
   const [loadingServices, setLoadingServices] = useState(true);
 
   const loadServices = useCallback(async () => {
-    if (!user?.id) return;
+    if (!authData?.uid) return;
 
     try {
       setLoadingServices(true);
-      const userServices = await getServicesByClient(user.id.toString());
+      const userServices = await serviceService.getServicesByClient(authData.uid);
       setServices(userServices);
     } catch (error) {
       console.error("Erro ao carregar serviços:", error);
     } finally {
       setLoadingServices(false);
     }
-  }, [user?.id]);
+  }, [authData?.uid]);
 
   useEffect(() => {
-    if (user?.id) {
+    if (authData?.uid) {
       loadServices();
     }
-  }, [user?.id, loadServices]);
+  }, [authData?.uid, loadServices]);
 
   const handleSearch = (query: string) => {
     console.log('Pesquisando por:', query);
@@ -43,18 +45,18 @@ export default function ClientHomePage() {
   };
 
   const handleCreateService = async (serviceData: {
-    foto: string;
-    titulo: string;
-    descricao: string;
-    categoria: string;
+    picture: string;
+    title: string;
+    description: string;
+    category: string;
   }) => {
-    if (!user?.id) return;
+    if (!authData?.uid) return;
 
     try {
       setLoading(true);
-      const newService = await createService({
+      const newService = await serviceService.createService({
         ...serviceData,
-        clientId: user.id.toString(),
+        firebaseUid: authData.uid,
       });
 
       setServices(prev => [newService, ...prev]);
@@ -77,17 +79,13 @@ export default function ClientHomePage() {
     }
 
     try {
-      await deleteService(serviceId);
+      await serviceService.deleteService(serviceId);
       setServices(prev => prev.filter(service => service.id !== serviceId));
     } catch (error) {
       console.error("Erro ao excluir serviço:", error);
       alert("Erro ao excluir serviço. Tente novamente.");
     }
   };
-
-// const handleViewProposals = (serviceId: string) => {
-//   console.log("Ver propostas do serviço:", serviceId);
-// };
 
   return (
     <div className="min-h-screen w-full bg-accent-yellow flex flex-col">

@@ -1,5 +1,5 @@
-import Input from "../Input";
-import FormSection from "../FormSection";
+import Input from "../common/Input.tsx";
+import FormSection from "../common/FormSection.tsx";
 import type { FormData } from "../../types/form";
 
 interface PersonalInfoFormProps {

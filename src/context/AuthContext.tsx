@@ -1,4 +1,6 @@
 import React, { createContext, useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { api } from "../services/api";
 import type {AuthContextType} from "../types/AuthContextType.ts";
 import type {LoginResponse} from "../types/LoginResponse.ts";

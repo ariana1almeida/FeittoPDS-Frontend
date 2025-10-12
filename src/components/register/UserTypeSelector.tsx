@@ -1,5 +1,5 @@
-import RadioGroup from "../RadioGroup";
-import FormSection from "../FormSection";
+import RadioGroup from "../common/RadioGroup.tsx";
+import FormSection from "../common/FormSection.tsx";
 import type { UserType } from "../../types/form";
 
 interface UserTypeSelectorProps {

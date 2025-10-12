@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Input from "../Input";
+import Input from "../common/Input.tsx";
 import { useAuth } from "../../hooks/useAuth";
-import SubmitButton from "../SubmitButton";
+import SubmitButton from "../common/SubmitButton.tsx";
 
 export default function LoginForm() {
   const { login } = useAuth();
@@ -24,7 +24,6 @@ export default function LoginForm() {
       setError("Email ou senha inválidos");
       return;
     }
-    window.location.hash = "#/";
   };
 
   const navigateTo = (path: string) => {

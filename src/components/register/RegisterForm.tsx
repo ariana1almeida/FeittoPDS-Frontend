@@ -5,7 +5,7 @@ import PersonalInfoForm from "./PersonalInfoForm";
 import UserTypeSelector from "./UserTypeSelector";
 import ClientForm from "./ClientForm";
 import ProviderForm from "./ProviderForm";
-import SubmitButton from "../SubmitButton";
+import SubmitButton from "../common/SubmitButton.tsx";
 
 export default function RegisterForm() {
   const [formData, setFormData] = useState<FormData>({
@@ -15,19 +15,16 @@ export default function RegisterForm() {
     phone: "",
     password: "",
     userType: "CLIENT",
+    neighborhood: "",
+    city: "",
+    state: "",
     clientData: {
       street: "",
       houseNumber: "",
       reference: "",
-      neighborhood: "",
-      city: "",
-      state: "",
     },
     providerData: {
       profession: "",
-      neighborhood: "",
-      city: "",
-      state: "",
     },
   });
 
@@ -37,34 +34,30 @@ export default function RegisterForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validateForm = (): boolean => {
-    const { firstName, lastName, email, phone, password } = formData;
+    const { firstName, lastName, email, phone, password, neighborhood, city, state } = formData;
     const commonFieldsValid = !!(
         firstName.trim() &&
         lastName.trim() &&
         email.trim() &&
         phone.trim() &&
-        password.trim()
+        password.trim() &&
+        neighborhood.trim() &&
+        city &&
+        state
     );
 
     if (!commonFieldsValid) return false;
 
     if (formData.userType === "CLIENT") {
-      const { street, houseNumber, neighborhood, city, state } =
-          formData.clientData;
+      const { street, houseNumber } = formData.clientData;
       const houseNumberValid =
           typeof houseNumber === "string"
               ? houseNumber.trim() !== ""
               : houseNumber > 0;
-      return !!(
-          street.trim() &&
-          houseNumberValid &&
-          neighborhood.trim() &&
-          city &&
-          state
-      );
+      return !!(street.trim() && houseNumberValid);
     } else {
-      const { profession, neighborhood, city, state } = formData.providerData;
-      return !!(profession && neighborhood.trim() && city && state);
+      const { profession } = formData.providerData;
+      return !!(profession.trim());
     }
   };
 
@@ -82,29 +75,51 @@ export default function RegisterForm() {
       e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    const processedValue =
-        name === "houseNumber"
-            ? value === ""
-                ? ""
-                : parseInt(value) || ""
-            : value;
 
-    setFormData({
-      ...formData,
-      clientData: { ...formData.clientData, [name]: processedValue },
-    });
+    if (name.startsWith('clientData.')) {
+      const fieldName = name.replace('clientData.', '');
+      const processedValue =
+          fieldName === "houseNumber"
+              ? value === ""
+                  ? ""
+                  : parseInt(value) || ""
+              : value;
+
+      setFormData({
+        ...formData,
+        clientData: { ...formData.clientData, [fieldName]: processedValue },
+      });
+    } else {
+      // Para campos diretos como neighborhood, city, state
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
   const setProvider = (
       e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) =>
+  ) => {
+    const { name, value } = e.target;
+
+    if (name.startsWith('providerData.')) {
+      const fieldName = name.replace('providerData.', '');
       setFormData({
         ...formData,
         providerData: {
           ...formData.providerData,
-          [e.target.name]: e.target.value,
+          [fieldName]: value,
         },
       });
+    } else {
+      // Para campos diretos como neighborhood, city, state
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -124,6 +139,9 @@ export default function RegisterForm() {
         phone: formData.phone,
         password: formData.password,
         userType: formData.userType,
+        city: formData.city,
+        neighborhood: formData.neighborhood,
+        state: formData.state,
         data:
             formData.userType === "CLIENT"
                 ? {
@@ -164,7 +182,7 @@ export default function RegisterForm() {
 
           {formData.userType === "CLIENT" && (
               <ClientForm
-                  formData={formData.clientData}
+                  formData={formData}
                   onChange={setClient}
                   showValidation={showValidation}
               />
@@ -172,7 +190,7 @@ export default function RegisterForm() {
 
           {formData.userType === "PROVIDER" && (
               <ProviderForm
-                  formData={formData.providerData}
+                  formData={formData}
                   onChange={setProvider}
                   showValidation={showValidation}
               />

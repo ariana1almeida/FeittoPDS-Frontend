@@ -1,6 +1,6 @@
 import RegisterForm from "../components/register/RegisterForm";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../components/common/Header.tsx";
+import Footer from "../components/common/Footer.tsx";
 
 function RegisterPage() {
     return (
