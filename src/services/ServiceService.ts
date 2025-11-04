@@ -23,6 +23,10 @@ export class ServiceService {
         const response = await api.get(`/services/client/${clientId}`);
         return response.data as ServiceEntity[];
     };
+    getAllServices = async (): Promise<ServiceEntity[]> => {
+        const response = await api.get("/services");
+        return response.data as ServiceEntity[];
+    }
 
     deleteService = async (serviceId: string): Promise<void> => {
         await api.delete(`/services/${serviceId}`);

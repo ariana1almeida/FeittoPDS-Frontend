@@ -7,6 +7,9 @@ import ClientHomePage from "./pages/ClientHomePage";
 import ProviderHomePage from "./pages/ProviderHomePage";
 import { AuthProvider } from "./context/AuthContext";
 import { useAuth } from "./hooks/useAuth";
+import ProfilePage from "./pages/ProfilePage";
+import ForgotPassword from "./pages/ForgotPassword.tsx";
+import ResetPassword from "./pages/ResetPassword.tsx";
 
 export default function App() {
     return (
@@ -57,11 +60,21 @@ function AppContent() {
             <Route path="/" element={<HomeRedirect />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/forgot-password" element={<ForgotPassword/>}/>
+            <Route path="/reset-password" element={<ResetPassword/>}/>
             <Route
                 path="/client/home"
                 element={
                     <ProtectedRoute userType="CLIENT">
                         <ClientHomePage />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/profile"
+                element={
+                    <ProtectedRoute userType="CLIENT">
+                        <ProfilePage auth={useAuth()} />
                     </ProtectedRoute>
                 }
             />
