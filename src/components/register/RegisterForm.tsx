@@ -165,7 +165,7 @@ export default function RegisterForm() {
   };
 
   return (
-      <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
+      <div className="w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
         <h1 className="text-3xl font-bold mb-8 text-center text-primary-dark">Cadastre-se</h1>
 
         <form onSubmit={handleSubmit} className="space-y-4">

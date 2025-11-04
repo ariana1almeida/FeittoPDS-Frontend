@@ -4,7 +4,7 @@ import Footer from "../components/common/Footer.tsx";
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen w-full bg-accent-yellow flex flex-col">
+    <div className="min-h-screen w-full bg-neutral-light flex flex-col">
       <Header />
       <div className="flex-1 flex items-center justify-center px-4 py-10">
         <LoginForm />

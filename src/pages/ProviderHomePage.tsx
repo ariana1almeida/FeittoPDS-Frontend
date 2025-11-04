@@ -1,81 +1,82 @@
-import React from 'react';
 import Header from '../components/common/Header.tsx';
 import Footer from '../components/common/Footer.tsx';
+import SearchBar from "../components/common/SearchBar.tsx";
+import {useCallback, useEffect, useState} from "react";
+import type {ServiceEntity} from "../types/ServiceEntity.ts";
+import {ServiceService} from "../services/ServiceService.ts";
+import ServiceCard from "../components/service/ServiceCard.tsx";
 
-const ProviderHomePage: React.FC = () => {
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <Header />
+export default function ProviderHomePage() {
+    const serviceService = ServiceService.getInstance();
+    const [services, setServices] = useState<ServiceEntity[]>([]);
+    const [loadingServices, setLoadingServices] = useState(true);
+    const handleSearch = (query: string) => {
+        console.log('Pesquisando por:', query);
+    };
+    const loadServices = useCallback(async () => {
 
-      <main className="container mx-auto px-4 py-8">
-        {/* Welcome Section */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-4">
-            Bem-vindo, Prestador de Serviços!
-          </h1>
-          <p className="text-gray-600 text-lg">
-            Gerencie seus serviços e atenda seus clientes de forma eficiente.
-          </p>
-        </div>
+        try {
+            setLoadingServices(true);
+            const allServices = await serviceService.getAllServices();
+            setServices(allServices);
+        } catch (error) {
+            console.error("Erro ao carregar serviços:", error);
+        } finally {
+            setLoadingServices(false);
+        }
+    }, [serviceService]);
 
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-blue-500 text-white rounded-lg p-6">
-            <h3 className="text-xl font-semibold mb-2">Serviços Ativos</h3>
-            <p className="text-3xl font-bold">12</p>
-          </div>
-          <div className="bg-green-500 text-white rounded-lg p-6">
-            <h3 className="text-xl font-semibold mb-2">Clientes Atendidos</h3>
-            <p className="text-3xl font-bold">45</p>
-          </div>
-          <div className="bg-purple-500 text-white rounded-lg p-6">
-            <h3 className="text-xl font-semibold mb-2">Avaliação Média</h3>
-            <p className="text-3xl font-bold">4.8</p>
-          </div>
-        </div>
-
-        {/* Quick Actions */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">Ações Rápidas</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <button className="bg-blue-600 text-white px-4 py-3 rounded-lg hover:bg-blue-700 transition-colors">
-              Criar Novo Serviço
-            </button>
-            <button className="bg-green-600 text-white px-4 py-3 rounded-lg hover:bg-green-700 transition-colors">
-              Ver Solicitações
-            </button>
-            <button className="bg-yellow-600 text-white px-4 py-3 rounded-lg hover:bg-yellow-700 transition-colors">
-              Meus Serviços
-            </button>
-            <button className="bg-purple-600 text-white px-4 py-3 rounded-lg hover:bg-purple-700 transition-colors">
-              Relatórios
-            </button>
-          </div>
-        </div>
-
-        {/* Recent Activity */}
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">Atividade Recente</h2>
-          <div className="space-y-4">
-            <div className="border-l-4 border-blue-500 pl-4 py-2">
-              <p className="font-semibold text-gray-800">Nova solicitação de serviço</p>
-              <p className="text-gray-600 text-sm">Limpeza residencial - há 2 horas</p>
+    useEffect(() => {
+        if (services.length === 0) {
+            loadServices();
+        }
+    }, [loadServices, serviceService, services]);
+    return (
+        <div className="min-h-screen w-full bg-neutral-light flex flex-col">
+            <Header/>
+            <div className="flex-1 px-4 py-6">
+                <SearchBar
+                    onSearch={handleSearch}
+                    placeholder="Pesquisar serviços, categorias..."
+                />
             </div>
-            <div className="border-l-4 border-green-500 pl-4 py-2">
-              <p className="font-semibold text-gray-800">Serviço concluído</p>
-              <p className="text-gray-600 text-sm">Jardinagem - há 1 dia</p>
+            <div className="w-full max-w-2xl mx-auto mt-6">
+                {loadingServices ? (
+                    <div className="text-center py-8">
+                        <div
+                            className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-dark mx-auto"></div>
+                        <p className="mt-2 text-gray-600">Carregando serviços...</p>
+                    </div>
+                ) : services.length > 0 ? (
+                    <div className="space-y-4">
+                        <h3 className="text-lg font-semibold text-gray-800 mb-4">
+                            Meus Serviços ({services.length})
+                        </h3>
+                        {services.map((service) => (
+                            <ServiceCard
+                                key={service.id}
+                                service={service} onView={function (): void {
+                                throw new Error("Function not implemented.");
+                            }} onDelete={function (): void {
+                                throw new Error("Function not implemented.");
+                            }} onViewProposals={function (): void {
+                                throw new Error("Function not implemented.");
+                            }}
+                            />
+                        ))}
+                    </div>
+                ) : (
+                    <div className="text-center py-8 bg-white rounded-lg shadow-sm">
+                        <p className="text-gray-500">
+                            Você ainda não criou nenhum serviço.
+                        </p>
+                        <p className="text-gray-400 text-sm mt-1">
+                            Clique no botão acima para criar seu primeiro serviço.
+                        </p>
+                    </div>
+                )}
             </div>
-            <div className="border-l-4 border-yellow-500 pl-4 py-2">
-              <p className="font-semibold text-gray-800">Nova avaliação recebida</p>
-              <p className="text-gray-600 text-sm">5 estrelas - há 2 dias</p>
-            </div>
-          </div>
+            <Footer/>
         </div>
-      </main>
-
-      <Footer />
-    </div>
-  );
+    );
 };
-
-export default ProviderHomePage;

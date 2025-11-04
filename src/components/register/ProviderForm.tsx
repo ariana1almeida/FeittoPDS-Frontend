@@ -29,6 +29,27 @@ export default function ProviderForm({
             error={showValidation && !formData.providerData.profession}
         />
 
+          <div className="grid grid-cols-2 gap-4">
+              <CustomSelect
+                  label="Estado"
+                  name="state"
+                  value={formData.state}
+                  options={STATES}
+                  placeholder="Selecione o estado"
+                  onChange={onChange}
+                  error={showValidation && !formData.state}
+              />
+              <CustomSelect
+                  label="Cidade"
+                  name="city"
+                  value={formData.city}
+                  options={CITIES}
+                  placeholder="Selecione a cidade"
+                  onChange={onChange}
+                  error={showValidation && !formData.city}
+              />
+          </div>
+
         <Input
             name="neighborhood"
             label="Bairro"
@@ -38,28 +59,6 @@ export default function ProviderForm({
             required
             error={showValidation && !formData.neighborhood.trim()}
         />
-
-        <div className="grid grid-cols-2 gap-4">
-          <CustomSelect
-              label="Cidade"
-              name="city"
-              value={formData.city}
-              options={CITIES}
-              placeholder="Selecione a cidade"
-              onChange={onChange}
-              error={showValidation && !formData.city}
-          />
-
-          <CustomSelect
-              label="Estado"
-              name="state"
-              value={formData.state}
-              options={STATES}
-              placeholder="Selecione o estado"
-              onChange={onChange}
-              error={showValidation && !formData.state}
-          />
-        </div>
       </FormSection>
   );
 }
