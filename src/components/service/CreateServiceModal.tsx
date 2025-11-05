@@ -1,17 +1,16 @@
 import { useState } from "react";
-import Input from "./Input";
-import Textarea from "./Textarea";
-import CustomSelect from "./CustomSelect";
-import ModalHeader from "./ModalHeader";
-import ModalActions from "./ModalActions";
-import { getServiceCategoryOptions } from "../constants/formData";
-import { initialServiceFormData, validateServiceForm } from "../utils/formUtils";
-import type { ServiceFormData } from "../utils/formUtils";
+import Input from "../common/Input.tsx";
+import Textarea from "../common/Textarea.tsx";
+import CustomSelect from "../common/CustomSelect.tsx";
+import ModalHeader from "../common/ModalHeader.tsx";
+import ModalActions from "../common/ModalActions.tsx";
+import { getServiceCategoryOptions } from "../../constants/formData.ts";
+import type {ServiceType} from "../../types/ServiceType.ts";
 
 interface CreateServiceModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (serviceData: ServiceFormData) => void;
+  onSubmit: (serviceData: ServiceType) => void;
   loading?: boolean;
 }
 
@@ -21,7 +20,12 @@ const CreateServiceModal = ({
   onSubmit,
   loading = false
 }: CreateServiceModalProps) => {
-  const [formData, setFormData] = useState<ServiceFormData>(initialServiceFormData);
+  const [formData, setFormData] = useState<ServiceType>({
+    picture: "",
+    title: "",
+    description: "",
+    category: ""
+  });
   const [errors, setErrors] = useState<Record<string, boolean>>({});
 
   const professionOptions = getServiceCategoryOptions();
@@ -37,20 +41,38 @@ const CreateServiceModal = ({
     }
   };
 
-  const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+  const validateServiceForm=(formData: ServiceType) => {
+        const errors: Record<string, boolean> = {};
+
+      if (!formData?.title?.trim()) {
+          errors.title = true;
+      }
+      if (!formData?.description?.trim()) {
+          errors.description = true;
+      }
+      if (!formData?.category?.trim()) {
+          errors.category = true;
+      }
+      if (!formData?.picture?.trim()) {
+          errors.picture = true;
+      }
+
+        return errors;
+    }
+
+    const handleInputChange = (field: string, value: string) => {
+        setFormData(prev => ({ ...prev, [field]: value }));
     if (errors[field]) {
       setErrors(prev => ({ ...prev, [field]: false }));
     }
   };
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
-    handleInputChange("categoria", value);
+    const value = e.target.value ?? null;
+    handleInputChange("category", value);
   };
 
   const handleClose = () => {
-    setFormData(initialServiceFormData);
     setErrors({});
     onClose();
   };
@@ -74,9 +96,9 @@ const CreateServiceModal = ({
               label="Título"
               type="text"
               placeholder="Digite o título do serviço"
-              value={formData.titulo}
-              onChange={(e) => handleInputChange("titulo", e.target.value)}
-              error={errors.titulo}
+              value={formData.title}
+              onChange={(e) => handleInputChange("title", e.target.value)}
+              error={errors.title}
               required
             />
 
@@ -84,9 +106,9 @@ const CreateServiceModal = ({
               name="descricao"
               label="Descrição"
               placeholder="Descreva detalhadamente o serviço"
-              value={formData.descricao}
-              onChange={(e) => handleInputChange("descricao", e.target.value)}
-              error={errors.descricao}
+              value={formData?.description}
+              onChange={(e) => handleInputChange("description", e.target.value)}
+              error={errors.description}
               rows={4}
               required
             />
@@ -95,10 +117,10 @@ const CreateServiceModal = ({
               label="Categoria"
               name="categoria"
               options={professionOptions}
-              value={formData.categoria}
+              value={formData.category}
               onChange={handleSelectChange}
               placeholder="Selecione a categoria"
-              error={errors.categoria}
+              error={errors.category}
             />
 
             <Input
@@ -106,9 +128,9 @@ const CreateServiceModal = ({
               label="URL da Foto"
               type="url"
               placeholder="https://exemplo.com/foto.jpg"
-              value={formData.foto}
-              onChange={(e) => handleInputChange("foto", e.target.value)}
-              error={errors.foto}
+              value={formData.picture}
+              onChange={(e) => handleInputChange("picture", e.target.value)}
+              error={errors.picture}
               required
             />
 

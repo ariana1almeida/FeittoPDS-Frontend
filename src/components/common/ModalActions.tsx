@@ -1,4 +1,4 @@
-import SubmitButton from "./SubmitButton";
+import SubmitButton from "./SubmitButton.tsx";
 
 interface ModalActionsProps {
   onCancel: () => void;

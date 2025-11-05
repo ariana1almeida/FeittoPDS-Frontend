@@ -4,16 +4,10 @@ export interface ClientData {
   street: string;
   houseNumber: number | string;
   reference: string;
-  neighborhood: string;
-  city: string;
-  state: string;
 }
 
 export interface ProviderData {
   profession: string;
-  neighborhood: string;
-  city: string;
-  state: string;
 }
 
 export interface FormData {
@@ -22,6 +16,9 @@ export interface FormData {
   email: string;
   phone: string;
   password: string;
+  neighborhood: string;
+  city: string;
+  state: string;
   userType: UserType;
   clientData: ClientData;
   providerData: ProviderData;

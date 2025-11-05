@@ -1,10 +1,10 @@
 import RegisterForm from "../components/register/RegisterForm";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../components/common/Header.tsx";
+import Footer from "../components/common/Footer.tsx";
 
 function RegisterPage() {
     return (
-        <div className="min-h-screen w-full bg-accent-yellow flex flex-col">
+        <div className="min-h-screen w-full bg-neutral-light flex flex-col">
             <Header />
 
             <div className="flex-1 p-6">
