@@ -11,5 +11,9 @@ export interface ServiceEntity {
         firstName: string;
         lastName: string;
         userType: string;
+        averageRating: number;
+        numberOfRatings: number;
+        neighborhood?: string;
+        city?: string;
     };
 }

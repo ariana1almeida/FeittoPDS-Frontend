@@ -2,6 +2,14 @@ import { api } from "./api";
 import type {ServiceType} from "../types/ServiceType.ts";
 import type {ServiceEntity} from "../types/ServiceEntity.ts";
 
+export interface CreateServiceData {
+    picture?: string;
+    title?: string;
+    description?: string;
+    category?: string;
+    firebaseUid?: string;
+}
+
 export class ServiceService {
     private static instance: ServiceService;
 

@@ -23,7 +23,6 @@ export default function TermsOfUsePage() {
                     <p className="text-sm text-neutral-medium mb-8">Última atualização: 04 de novembro de 2025</p>
 
                     <div className="flex w-full max-w-6xl">
-                        {/* Índice lateral */}
                         <aside className="w-50">
                             <nav className="sticky top-8 space-y-2 p-2">
                                 <p className="text-sm font-semibold text-primary-dark mb-3">Navegação</p>
@@ -42,7 +41,6 @@ export default function TermsOfUsePage() {
                             </nav>
                         </aside>
 
-                        {/* Conteúdo principal */}
                         <div className="flex-1 bg-white p-8 rounded-lg shadow-md">
                             {activeSection === 'terms' ? <TermsContent /> : <PrivacyContent />}
                         </div>

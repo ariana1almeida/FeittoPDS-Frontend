@@ -4,7 +4,7 @@ import Footer from "../components/common/Footer.tsx";
 import CreateServiceModal from "../components/service/CreateServiceModal.tsx";
 import ServiceCard from "../components/service/ServiceCard.tsx";
 import {useAuth} from "../hooks/useAuth.ts";
-import {ServiceService} from "../services/ServiceService.ts";
+import {type CreateServiceData, ServiceService} from "../services/ServiceService.ts";
 import type {ServiceEntity} from "../types/ServiceEntity.ts";
 import {PlusIcon} from "@phosphor-icons/react";
 import {useNavigate} from "react-router-dom";

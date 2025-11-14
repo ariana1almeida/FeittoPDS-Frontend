@@ -38,10 +38,6 @@ function AppContent() {
             return <Navigate to="/login" replace/>;
         }
 
-        // if (authData?.userType !== userType) {
-        //     return <Navigate to="/login" replace />;
-        // }
-
         return <>{children}</>;
     }
 
