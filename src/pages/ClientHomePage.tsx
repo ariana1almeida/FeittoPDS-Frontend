@@ -1,6 +1,5 @@
 import {useState, useEffect, useCallback} from "react";
 import Header from "../components/common/Header.tsx";
-import SearchBar from "../components/common/SearchBar.tsx";
 import Footer from "../components/common/Footer.tsx";
 import CreateServiceModal from "../components/service/CreateServiceModal.tsx";
 import ServiceCard from "../components/service/ServiceCard.tsx";
@@ -8,6 +7,7 @@ import {useAuth} from "../hooks/useAuth.ts";
 import {ServiceService} from "../services/ServiceService.ts";
 import type {ServiceEntity} from "../types/ServiceEntity.ts";
 import {PlusIcon} from "@phosphor-icons/react";
+import {useNavigate} from "react-router-dom";
 
 export default function ClientHomePage() {
     const serviceService = ServiceService.getInstance();
@@ -16,6 +16,7 @@ export default function ClientHomePage() {
     const [services, setServices] = useState<ServiceEntity[]>([]);
     const [loading, setLoading] = useState(false);
     const [loadingServices, setLoadingServices] = useState(true);
+    const navigate = useNavigate();
 
     const loadServices = useCallback(async () => {
         if (!authData?.uid) return;
@@ -37,20 +38,11 @@ export default function ClientHomePage() {
         }
     }, [authData?.uid, loadServices]);
 
-    const handleSearch = (query: string) => {
-        console.log('Pesquisando por:', query);
-    };
-
     const handleNewServiceRequest = () => {
         setIsModalOpen(true);
     };
 
-    const handleCreateService = async (serviceData: {
-        picture: string;
-        title: string;
-        description: string;
-        category: string;
-    }) => {
+    const handleCreateService = async (serviceData: CreateServiceData) => {
         if (!authData?.uid) return;
 
         try {
@@ -68,6 +60,10 @@ export default function ClientHomePage() {
         } finally {
             setLoading(false);
         }
+    };
+
+    const handleViewProposals = (serviceId: string) => {
+        navigate(`/service/${serviceId}/proposals`);
     };
 
     const handleViewService = (serviceId: string) => {
@@ -93,11 +89,6 @@ export default function ClientHomePage() {
             <Header/>
 
             <div className="flex-1 px-4 py-6">
-                <SearchBar
-                    onSearch={handleSearch}
-                    placeholder="Pesquisar serviços, categorias..."
-                />
-
                 <div className="w-full max-w-2xl mx-auto mt-4">
                     <button
                         onClick={handleNewServiceRequest}
@@ -126,9 +117,8 @@ export default function ClientHomePage() {
                                     key={service.id}
                                     service={service}
                                     onView={handleViewService}
-                                    onDelete={handleDeleteService} onViewProposals={function (): void {
-                                    throw new Error("Function not implemented.");
-                                }}/>
+                                    onDelete={handleDeleteService}
+                                    onViewProposals={handleViewProposals}/>
                             ))}
                         </div>
                     ) : (

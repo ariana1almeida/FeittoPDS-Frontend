@@ -1,8 +1,8 @@
 import SubmitButton from "./SubmitButton.tsx";
 
 interface ModalActionsProps {
-  onCancel: () => void;
-  onSubmit?: () => void;
+  onCancel?: () => void;
+  onSubmit?: (e: React.FormEvent) => void;
   cancelLabel?: string;
   submitLabel?: string;
   submittingLabel?: string;
@@ -11,6 +11,12 @@ interface ModalActionsProps {
   submitType?: "button" | "submit";
 }
 
+/**TODO remover esse componente e usar o SubmitButton diretamente, olhar implementação existente na CreateProposalModal.tsx
+ * Motivo - Ao tentar reutilizar essa estrutura, acaba sendo adicionado uma complexidade desnecessária nos botões de ação do modal.
+ *
+ * Ao fazer isso, simplificamos o código e mantemos as lógicas referentes à cada formulário contidas dentro do próprio componente
+ * onde ele é criado facilitando depois a manutenção e reduzindo complexidade.
+ */
 const ModalActions = ({
   onCancel,
   onSubmit,
