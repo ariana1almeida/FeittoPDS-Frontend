@@ -8,8 +8,9 @@ import ProviderHomePage from "./pages/ProviderHomePage";
 import { AuthProvider } from "./context/AuthContext";
 import { useAuth } from "./hooks/useAuth";
 import ProfilePage from "./pages/ProfilePage";
-import ForgotPassword from "./pages/ForgotPassword.tsx";
-import ResetPassword from "./pages/ResetPassword.tsx";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage.tsx";
+import ResetPasswordPage from "./pages/ResetPasswordPage.tsx";
+import TermsOfUsePage from "./pages/TermsOfUsePage.tsx";
 
 export default function App() {
     return (
@@ -60,8 +61,9 @@ function AppContent() {
             <Route path="/" element={<HomeRedirect />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
-            <Route path="/forgot-password" element={<ForgotPassword/>}/>
-            <Route path="/reset-password" element={<ResetPassword/>}/>
+            <Route path="/forgot-password" element={<ForgotPasswordPage/>}/>
+            <Route path="/reset-password" element={<ResetPasswordPage/>}/>
+            <Route path="/terms" element={<TermsOfUsePage/>}/>
             <Route
                 path="/client/home"
                 element={

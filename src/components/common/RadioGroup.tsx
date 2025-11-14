@@ -29,7 +29,7 @@ export default function RadioGroup({
             value={opt.value}
             checked={selected === opt.value}
             onChange={onChange}
-            className="w-4 h-4 text-accent-yellow bg-neutral-light border-neutral-dark focus:ring-accent-yellow focus:ring-1"
+            className="w-4 h-4 text-accent-yellow bg-neutral-light border-neutral-dark"
           />
           <span className="text-sm font-medium text-primary-dark">{opt.label}</span>
         </label>
