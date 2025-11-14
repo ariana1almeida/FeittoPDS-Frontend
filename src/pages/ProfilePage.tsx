@@ -7,26 +7,30 @@ import {Tabs, TabsList, TabsTrigger, TabsContent} from "../components/common/Tab
 import ProfileAvatar from "../components/profile/ProfileAvatar.tsx";
 import PersonalInfoForm from "../components/profile/PersonalInfoForm.tsx";
 import AdvancedSettings from "../components/profile/AdvancedSettings.tsx";
-import {api} from "../services/api.ts";
 import type {ProfileResponse} from "../types/ProfileResponse.ts";
 import type {AuthContextType} from "../types/AuthContextType.ts";
 import {useState, useEffect} from "react";
+import {UserService} from "../services/UserService.ts";
 
 interface ProfilePageProps {
     auth?: AuthContextType
 }
 
 export default function ProfilePage({auth}: ProfilePageProps) {
+    const userService = UserService.getInstance();
     const [updateData, setUpdateData] = useState<ProfileResponse>({});
     const [loading, setLoading] = useState(true);
+    const isProvider = auth?.authData?.userType === "PROVIDER";
+    const uid = auth?.authData?.uid ?? '';
 
     const getProfileData = async () => {
-        const uid = auth?.authData?.uid;
-        if (!uid) return;
+        if (!uid || uid.trim() === '') return;
         try {
             setLoading(true);
-            const res = await api.get<ProfileResponse>(`/users/${uid}`);
-            setUpdateData(res.data)
+            const res = await userService.getUserProfileInformation(uid);
+            console.log('resposta do profile:', res);
+            // const res = await api.get<ProfileResponse>(endpoint);
+            setUpdateData(res)
         } catch (err) {
             console.error(err);
         } finally {
@@ -35,11 +39,15 @@ export default function ProfilePage({auth}: ProfilePageProps) {
     };
 
     const updateUserInformation = async () => {
-        const uid = auth?.authData?.uid;
+        if (!uid || uid.trim() === '') return;
         try {
             setLoading(true);
-            const res = await api.put<ProfileResponse>(`/users/${uid}`, {...updateData});
-            setUpdateData(res.data);
+            const updateInput = {...updateData};
+            if (updateInput?.id) {
+                delete updateInput.id;
+            }
+            const res = await userService.updateUserInformation(uid, updateInput);
+            setUpdateData(res);
         } catch (err) {
             console.log(err);
         } finally {
@@ -50,7 +58,7 @@ export default function ProfilePage({auth}: ProfilePageProps) {
     useEffect(() => {
         if (!auth?.authData?.uid) return;
         getProfileData();
-    }, [auth?.authData?.uid, getProfileData]);
+    }, [auth?.authData?.uid]);
 
     if (loading) {
         return (
@@ -69,7 +77,11 @@ export default function ProfilePage({auth}: ProfilePageProps) {
                 </div>
                 <div className="flex flex-col justify-start items-center flex-1 px-4">
                     <H1 className="text-primary-dark">Meu Perfil</H1>
-                    <P className="text-primary-dark/80">Gerencie suas informações pessoais e preferências</P>
+                    <P className="text-primary-dark/80">
+                        {isProvider
+                            ? "Gerencie suas informações profissionais"
+                            : "Gerencie suas informações pessoais e preferências"}
+                    </P>
                     <div className="bg-white m-40 mt-8 p-8 rounded-lg shadow-md w-full max-w-3xl">
                         <Tabs defaultValue="personal" className="w-full">
                             <TabsList className="grid w-full grid-cols-2 mb-10 bg-muted">
@@ -78,11 +90,14 @@ export default function ProfilePage({auth}: ProfilePageProps) {
                             </TabsList>
                             <TabsContent value="personal" className="space-y-10">
                                 <div className="flex flex-col space-y-3 items-center">
-                                    <ProfileAvatar/>
+                                    <ProfileAvatar
+                                        updateData={updateData}
+                                        setUpdateData={setUpdateData}/>
                                     <PersonalInfoForm
                                         updateData={updateData}
                                         setUpdateData={setUpdateData}
                                         onSubmit={updateUserInformation}
+                                        isProvider={isProvider}
                                     />
                                 </div>
                             </TabsContent>

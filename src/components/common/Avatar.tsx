@@ -1,48 +1,43 @@
 import * as React from "react";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
-import { cn } from "./utils";
+import {cn} from "./utils";
 
-export function Avatar({
-                           className,
-                           ...props
-                       }: React.ComponentProps<typeof AvatarPrimitive.Root>) {
+interface AvatarProps extends React.ComponentProps<typeof AvatarPrimitive.Root> {
+    image?: string;
+    alt?: string;
+    fallbackText?: string;
+    size?: 'sm' | 'md' | 'lg';
+}
+
+export function Avatar({className, image, alt = "", fallbackText = "", size = 'md', ...props}: AvatarProps) {
+    const sizeClasses = {
+        sm: 'size-8',
+        md: 'size-10',
+        lg: 'size-12'
+    };
+
     return (
         <AvatarPrimitive.Root
             data-slot="avatar"
             className={cn(
-                "relative flex size-10 shrink-0 overflow-hidden rounded-full",
+                "relative flex shrink-0 overflow-hidden rounded-full",
+                sizeClasses[size],
                 className,
             )}
             {...props}
-        />
-    );
-}
-
-export function AvatarImage({
-                                className,
-                                ...props
-                            }: React.ComponentProps<typeof AvatarPrimitive.Image>) {
-    return (
-        <AvatarPrimitive.Image
-            data-slot="avatar-image"
-            className={cn("aspect-square size-full", className)}
-            {...props}
-        />
-    );
-}
-
-export function AvatarFallback({
-                                   className,
-                                   ...props
-                               }: React.ComponentProps<typeof AvatarPrimitive.Fallback>) {
-    return (
-        <AvatarPrimitive.Fallback
-            data-slot="avatar-fallback"
-            className={cn(
-                "bg-muted flex size-full items-center justify-center rounded-full",
-                className,
+        >
+            {image && (
+                <AvatarPrimitive.Image
+                    src={image}
+                    alt={alt}
+                    className="aspect-square size-full object-cover"
+                />
             )}
-            {...props}
-        />
+            <AvatarPrimitive.Fallback
+                className="bg-primary-dark text-white flex size-full items-center justify-center rounded-full font-semibold"
+            >
+                {fallbackText?.charAt(0)?.toUpperCase() || '?'}
+            </AvatarPrimitive.Fallback>
+        </AvatarPrimitive.Root>
     );
 }
