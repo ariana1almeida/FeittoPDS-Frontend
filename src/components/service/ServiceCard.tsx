@@ -1,5 +1,5 @@
 import {PROFESSION_LABELS} from "../../constants/formData.ts";
-import {CalendarBlankIcon, EyeIcon, TrashIcon} from "@phosphor-icons/react";
+import {CalendarBlankIcon, TrashIcon} from "@phosphor-icons/react";
 import type {ServiceEntity} from "../../types/ServiceEntity.ts";
 
 interface ServiceCardProps {
@@ -11,7 +11,6 @@ interface ServiceCardProps {
 
 const ServiceCard = ({
                          service,
-                         onView,
                          onDelete,
                          onViewProposals
                      }: ServiceCardProps) => {
@@ -93,12 +92,6 @@ const ServiceCard = ({
                                 className="flex-1 bg-primary-dark text-white py-2 px-3 rounded-lg hover:bg-primary-medium transition-colors duration-200 text-sm font-medium"
                             >
                                 Ver Propostas
-                            </button>
-                            <button
-                                onClick={() => onView(service.id)}
-                                className="border border-status-success text-status-success py-2 px-3 rounded-lg hover:bg-green-200 transition-colors duration-200 text-sm font-medium"
-                            >
-                                <EyeIcon size={18} weight="light"/>
                             </button>
                             <button
                                 onClick={() => onDelete(service.id)}

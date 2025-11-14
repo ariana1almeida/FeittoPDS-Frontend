@@ -1,17 +1,11 @@
 import React, {useState} from "react";
 import {EyeClosedIcon, EyeIcon} from "@phosphor-icons/react";
 
-interface InputProps {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     name: string;
-    value: string | number | undefined;
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    placeholder?: string;
-    type?: string;
     label?: string;
-    required?: boolean;
     error?: boolean;
     icon?: React.ReactNode;
-    readOnly?: boolean;
     showPasswordToggle?: boolean;
 }
 
@@ -27,6 +21,7 @@ export default function Input({
                                   icon,
                                   readOnly = false,
                                   showPasswordToggle = false,
+                                  ...rest
                               }: InputProps) {
     const [showPassword, setShowPassword] = useState(false);
 
@@ -69,12 +64,14 @@ export default function Input({
                     onChange={onChange}
                     placeholder={placeholder}
                     readOnly={readOnly}
+                    required={required}
                     aria-invalid={error}
                     className={`w-full h-9 ${paddingClass} py-2 rounded-lg text-sm ${
                         error
                             ? "bg-red-50 border-2 border-status-error focus:border-status-error focus:ring-2 focus:ring-status-error/20"
                             : "bg-neutral-light border-2 border-transparent focus:bg-white focus:border-accent-yellow focus:ring-2 focus:ring-accent-yellow/20"
                     } text-primary-dark placeholder-neutral-dark/60 focus:outline-none`}
+                    {...rest}
                 />
 
                 {hasToggle && (
@@ -85,7 +82,10 @@ export default function Input({
                             aria-label={showPassword ? "Esconder senha" : "Mostrar senha"}
                             className="text-neutral-dark hover:text-neutral-700 bg-transparent border-none p-0 cursor-pointer"
                         >
-                            {showPassword ? <EyeClosedIcon size={20} className={"text-neutral-500"}/> : <EyeIcon size={20} className={"text-neutral-500"}/>}
+                            {showPassword ?
+                                <EyeClosedIcon size={20} className="text-neutral-500"/> :
+                                <EyeIcon size={20} className="text-neutral-500"/>
+                            }
                         </button>
                     </div>
                 )}
