@@ -6,12 +6,13 @@ import {CITIES} from "../../constants/formData.ts";
 import type {ProfileResponse} from "../../types/ProfileResponse.ts";
 
 interface PersonalInfoFormProps {
-    updateData: ProfileResponse;
-    setUpdateData: React.Dispatch<React.SetStateAction<ProfileResponse>>;
-    onSubmit: () => void;
+    updateData: ProfileResponse,
+    setUpdateData: React.Dispatch<React.SetStateAction<ProfileResponse>>,
+    onSubmit: () => void,
+    isProvider?: boolean
 }
 
-export default function PersonalInfoForm({updateData, setUpdateData, onSubmit}: PersonalInfoFormProps) {
+export default function PersonalInfoForm({updateData, setUpdateData, onSubmit, isProvider}: PersonalInfoFormProps) {
     return (
         <form className="w-full space-y-6">
             <div className="grid grid-cols-2 gap-4">
@@ -75,48 +76,68 @@ export default function PersonalInfoForm({updateData, setUpdateData, onSubmit}: 
                 </div>
             </div>
 
-            <div>
-                <label className="block text-sm font-medium text-primary-dark mb-1">Endereço</label>
-                <Input
-                    name=""
-                    value={updateData?.userData?.street ?? ""}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        setUpdateData(prev => ({
-                            ...(prev || {}),
-                            userData: {...(prev?.userData || {}), street: e.target.value}
-                        }));
-                    }}
-                />
-            </div>
+            {isProvider && (
+                <div>
+                    <label className="block text-sm font-medium text-primary-dark mb-1">Bairro</label>
+                    <Input
+                        name=""
+                        value={updateData?.neighborhood ?? ""}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            setUpdateData(prev => ({
+                                ...(prev || {}),
+                                userData: {...(prev?.userData || {}), neighborhood: e.target.value}
+                            }));
+                        }}
+                    />
+                </div>
+            )}
 
-            <div className="grid grid-cols-2 gap-4">
-                <div>
-                    <label className="block text-sm font-medium text-primary-dark mb-1">Número</label>
-                    <Input
-                        name=""
-                        value={updateData?.userData?.houseNumber?.toString() ?? ""}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                            setUpdateData(prev => ({
-                                ...(prev || {}),
-                                userData: {...(prev?.userData || {}), houseNumber: parseInt(e.target.value, 10)}
-                            }));
-                        }}
-                    />
-                </div>
-                <div>
-                    <label className="block text-sm font-medium text-primary-dark mb-1">Referência</label>
-                    <Input
-                        name=""
-                        value={updateData?.userData?.reference ?? ""}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                            setUpdateData(prev => ({
-                                ...(prev || {}),
-                                userData: {...(prev?.userData || {}), reference: e.target.value}
-                            }));
-                        }}
-                    />
-                </div>
-            </div>
+            {!isProvider && (
+                <>
+                    <div>
+                        <label className="block text-sm font-medium text-primary-dark mb-1">Endereço</label>
+                        <Input
+                            name=""
+                            value={updateData?.userData?.street ?? ""}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                setUpdateData(prev => ({
+                                    ...(prev || {}),
+                                    userData: {...(prev?.userData || {}), street: e.target.value}
+                                }));
+                            }}
+                        />
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                        <div>
+                            <label className="block text-sm font-medium text-primary-dark mb-1">Número</label>
+                            <Input
+                                name=""
+                                value={updateData?.userData?.houseNumber?.toString() ?? ""}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                    setUpdateData(prev => ({
+                                        ...(prev || {}),
+                                        userData: {...(prev?.userData || {}), houseNumber: parseInt(e.target.value, 10)}
+                                    }));
+                                }}
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-primary-dark mb-1">Referência</label>
+                            <Input
+                                name=""
+                                value={updateData?.userData?.reference ?? ""}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                    setUpdateData(prev => ({
+                                        ...(prev || {}),
+                                        userData: {...(prev?.userData || {}), reference: e.target.value}
+                                    }));
+                                }}
+                            />
+                        </div>
+                    </div>
+                </>
+            )}
 
             <button
                 type="submit"

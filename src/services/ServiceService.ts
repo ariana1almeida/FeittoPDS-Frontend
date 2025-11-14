@@ -1,5 +1,4 @@
 import { api } from "./api";
-import type {ServiceType} from "../types/ServiceType.ts";
 import type {ServiceEntity} from "../types/ServiceEntity.ts";
 
 export interface CreateServiceData {
@@ -22,7 +21,7 @@ export class ServiceService {
         return ServiceService.instance;
     }
 
-    createService = async (serviceData: ServiceType): Promise<ServiceEntity> => {
+    createService = async (serviceData: CreateServiceData): Promise<ServiceEntity> => {
         const response = await api.post("/services", serviceData);
         return response.data as ServiceEntity;
     };
@@ -34,7 +33,7 @@ export class ServiceService {
     getAllServices = async (): Promise<ServiceEntity[]> => {
         const response = await api.get("/services");
         return response.data as ServiceEntity[];
-    }
+    };
 
     deleteService = async (serviceId: string): Promise<void> => {
         await api.delete(`/services/${serviceId}`);
