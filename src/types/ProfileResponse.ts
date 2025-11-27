@@ -11,6 +11,9 @@ export interface ProfileResponse {
     phone?: string;
     userType?: UserType;
     userData?: UserDataDto;
+    averageRating?: number;
+    totalRatings?: number;
+    numberOfRatings?: number;
 }
 
 export interface UserDataDto {

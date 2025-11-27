@@ -21,15 +21,13 @@ export default function ProfilePage({auth}: ProfilePageProps) {
     const [updateData, setUpdateData] = useState<ProfileResponse>({});
     const [loading, setLoading] = useState(true);
     const isProvider = auth?.authData?.userType === "PROVIDER";
-    const uid = auth?.authData?.uid ?? '';
+    const id = auth?.authData?.id ?? '';
 
     const getProfileData = async () => {
-        if (!uid || uid.trim() === '') return;
+        if (!id || id.trim() === '') return;
         try {
             setLoading(true);
-            const res = await userService.getUserProfileInformation(uid);
-            console.log('resposta do profile:', res);
-            // const res = await api.get<ProfileResponse>(endpoint);
+            const res = await userService.getUserProfileInformation(id);
             setUpdateData(res)
         } catch (err) {
             console.error(err);
@@ -39,14 +37,14 @@ export default function ProfilePage({auth}: ProfilePageProps) {
     };
 
     const updateUserInformation = async () => {
-        if (!uid || uid.trim() === '') return;
+        if (!id || id.trim() === '') return;
         try {
             setLoading(true);
             const updateInput = {...updateData};
             if (updateInput?.id) {
                 delete updateInput.id;
             }
-            const res = await userService.updateUserInformation(uid, updateInput);
+            const res = await userService.updateUserInformation(id, updateInput);
             setUpdateData(res);
         } catch (err) {
             console.log(err);

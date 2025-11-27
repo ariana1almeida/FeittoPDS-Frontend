@@ -23,7 +23,7 @@ export default function ClientHomePage() {
 
         try {
             setLoadingServices(true);
-            const userServices = await serviceService.getServicesByClient(authData.uid);
+            const userServices = await serviceService.getServicesByClient(authData.id);
             setServices(userServices);
         } catch (error) {
             console.error("Erro ao carregar serviços:", error);
@@ -105,7 +105,7 @@ export default function ClientHomePage() {
                         <div className="text-center py-8">
                             <div
                                 className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-dark mx-auto"></div>
-                            <p className="mt-2 text-gray-600">Carregando serviços...</p>
+                            <p className="mt-2 text-neutral-medium">Carregando serviços...</p>
                         </div>
                     ) : services.length > 0 ? (
                         <div className="space-y-4">

@@ -39,4 +39,8 @@ export class ProposalService {
         const response = await api.get(`/proposal/provider/${providerId}`);
         return response.data as ProposalEntity[];
     };
+
+    deleteAllProposalsFromServiceOtherThanAccepted = async (serviceId: string): Promise<void> => {
+        await api.delete(`/proposal/service/${serviceId}`);
+    }
 }

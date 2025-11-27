@@ -32,7 +32,7 @@ const ModalActions = ({
       <button
           type="button"
           onClick={onCancel}
-          className="w-32 bg-white border border-gray-300 text-gray-700 py-3 px-6 rounded-lg font-semibold text-sm
+          className="w-32 bg-white border border-gray-300 text-neutral-dark py-3 px-6 rounded-lg font-semibold text-sm
     hover:bg-gray-50 transition-all duration-200 mt-6 shadow-sm hover:shadow-md
     focus:ring-2 focus:ring-gray-300/20 focus:outline-none"
       >

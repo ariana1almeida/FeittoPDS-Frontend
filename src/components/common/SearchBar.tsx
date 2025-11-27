@@ -33,7 +33,7 @@ export default function SearchBar({
                         value={query}
                         onChange={handleInputChange}
                         placeholder={placeholder}
-                        className="flex-1 px-3 py-2 text-gray-700 focus:outline-none focus:ring-none"
+                        className="flex-1 px-3 py-2 text-neutral-dark focus:outline-none focus:ring-none"
                     />
                     <button
                         type="submit"

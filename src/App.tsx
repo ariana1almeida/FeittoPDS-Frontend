@@ -26,7 +26,6 @@ export default function App() {
 
 function AppContent() {
     function ProtectedRoute({children}: { children: React.ReactNode; userType?: "CLIENT" | "PROVIDER" }) {
-        console.log("UserType value qlqr coisa", children);
         const {loading, authData} = useAuth();
 
         if (loading) {

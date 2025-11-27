@@ -94,7 +94,7 @@ export default function ProviderHomePage() {
                         <div className="text-center py-8">
                             <div
                                 className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-dark mx-auto"></div>
-                            <p className="mt-2 text-gray-600">Carregando serviços...</p>
+                            <p className="mt-2 text-neutral-medium">Carregando serviços...</p>
                         </div>
                     ) : services.length > 0 ? (
                         <div className="space-y-4">
