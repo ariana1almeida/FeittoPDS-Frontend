@@ -56,14 +56,12 @@ const CreateProposalModal = ({
     };
 
     const handleSubmit = (e: React.FormEvent) => {
-        console.log('chamou o handle submit');
         e.preventDefault();
 
         const validationErrors = validateProposalForm(formData);
         setErrors(validationErrors);
 
         if (Object.keys(validationErrors).length === 0) {
-            console.log("CHAMOU O ONSUBMIT DO MODAL COM OS DADOS:", formData);
             onSubmit(formData);
         }
     };
@@ -109,7 +107,7 @@ const CreateProposalModal = ({
                     <form className="space-y-4">
                         <Input
                             name="tempoEstimado"
-                            label="Tempo Estimado"
+                            label="Tempo Estimado (em dias)"
                             type="number"
                             placeholder="Ex: 5"
                             value={formData.estimatedDays}
@@ -152,7 +150,7 @@ const CreateProposalModal = ({
                             <button
                                 type="button"
                                 onClick={handleClose}
-                                className="w-40 bg-white border border-gray-300 text-gray-700 py-3 px-6 rounded-lg font-semibold text-sm
+                                className="w-40 bg-white border border-gray-300 text-neutral-dark py-3 px-6 rounded-lg font-semibold text-sm
                             hover:bg-gray-50 transition-all duration-200 mt-6 shadow-sm hover:shadow-md
                             focus:ring-2 focus:ring-gray-300/20 focus:outline-none">
                                 Cancelar
