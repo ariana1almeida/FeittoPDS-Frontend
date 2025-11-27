@@ -1,7 +1,6 @@
 import {useAuth} from "../hooks/useAuth";
 import Header from "../components/common/Header.tsx";
 import Footer from "../components/common/Footer.tsx";
-import SearchBar from "../components/common/SearchBar.tsx";
 import ClientHomePage from "./ClientHomePage";
 import ProviderHomePage from "./ProviderHomePage";
 import {DevicesIcon, HandshakeIcon, StarIcon} from "@phosphor-icons/react";
@@ -9,10 +8,6 @@ import {HowItWorks} from "../components/home/HowItWorks.tsx";
 
 export function HomePage() {
     const {authData} = useAuth();
-
-    const handleSearch = (query: string) => {
-        console.log('Pesquisando por:', query);
-    };
 
     const navigateTo = (path: string) => {
         window.location.hash = path;
@@ -32,12 +27,6 @@ export function HomePage() {
                             <p className="text-lg text-primary-dark mb-6">
                                 Conectamos você aos melhores prestadores de serviços do litoral norte gaúcho
                             </p>
-                            <div className="py-8">
-                                <SearchBar
-                                    onSearch={handleSearch}
-                                    placeholder="Pesquisar serviços, profissionais..."
-                                />
-                            </div>
                             <div className="flex py-8 justify-center gap-4">
                                 <button
                                     onClick={() => navigateTo('/login')}
@@ -63,7 +52,7 @@ export function HomePage() {
                                     </div>
                                     <h3 className="text-xl font-semibold text-primary-dark">Qualidade Garantida</h3>
                                 </div>
-                                <p className="text-gray-600 text-center">
+                                <p className="text-neutral-medium text-center">
                                     Todos os prestadores são avaliados pelos clientes
                                 </p>
                             </div>
@@ -76,7 +65,7 @@ export function HomePage() {
                                     </div>
                                     <h3 className="text-xl font-semibold text-primary-dark">Fácil de Usar</h3>
                                 </div>
-                                <p className="text-gray-600 text-center">
+                                <p className="text-neutral-medium text-center">
                                     Encontre, agende e avalie serviços em poucos cliques
                                 </p>
                             </div>
@@ -89,7 +78,7 @@ export function HomePage() {
                                     </div>
                                     <h3 className="text-xl font-semibold text-primary-dark">Na palma da mão</h3>
                                 </div>
-                                <p className="text-gray-600 text-center">
+                                <p className="text-neutral-medium text-center">
                                     Você pode acessar nossos serviços de qualquer dispositivo
                                 </p>
                             </div>
