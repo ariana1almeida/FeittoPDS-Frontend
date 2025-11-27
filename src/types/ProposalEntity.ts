@@ -7,14 +7,24 @@ export interface ProposalEntity {
     description: string;
     accepted?: boolean;
     service?:{
+        clientId: string
         title: string;
         picture: string;
         description: string;
+        status: string;
     };
     provider?:{
+        firstName: string;
+        lastName: string;
         name: string;
         picture?: string;
+        phone: string;
         averageRating: number;
         numberOfRatings: number;
+        providerData?:{
+            id: string;
+            profession: string;
+            userId: string;
+        }
     }
 }

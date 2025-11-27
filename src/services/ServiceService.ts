@@ -1,4 +1,4 @@
-import { api } from "./api";
+import {api} from "./api";
 import type {ServiceEntity} from "../types/ServiceEntity.ts";
 
 export interface CreateServiceData {
@@ -30,6 +30,17 @@ export class ServiceService {
         const response = await api.get(`/services/client/${clientId}`);
         return response.data as ServiceEntity[];
     };
+
+    getServiceById = async (serviceId: string | undefined): Promise<ServiceEntity> => {
+        const response = await api.get(`/services/${serviceId}`);
+        return response.data as ServiceEntity;
+    }
+
+    updateServiceStatus = async (serviceId: string, status: string): Promise<ServiceEntity> => {
+        const response = await api.patch(`/services/${serviceId}/status`, { status });
+        return response.data as ServiceEntity;
+    }
+
     getAllServices = async (): Promise<ServiceEntity[]> => {
         const response = await api.get("/services");
         return response.data as ServiceEntity[];
