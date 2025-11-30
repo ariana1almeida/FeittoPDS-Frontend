@@ -20,7 +20,7 @@ interface ProposalType {
 }
 
 export default function ProviderHomePage() {
-    const auth=useAuth();
+    const auth = useAuth();
     const serviceService = ServiceService.getInstance();
     const proposalService = ProposalService.getInstance();
     const navigate = useNavigate();

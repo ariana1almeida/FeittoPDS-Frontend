@@ -23,7 +23,7 @@ export interface ProposalEntity {
         numberOfRatings: number;
         providerData?:{
             id: string;
-            profession: string;
+            professions?: string[];
             userId: string;
         }
     }

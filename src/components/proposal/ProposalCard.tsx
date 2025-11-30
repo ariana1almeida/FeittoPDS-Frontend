@@ -78,7 +78,7 @@ export default function ProposalCard({proposal, service, onAccept, onCancel, onC
                             {`${proposal?.provider?.firstName || ''} ${proposal?.provider?.lastName || 'Prestador'}`}
                         </h3>
                         <p className="text-sm text-gray-500">
-                            {proposal?.provider?.providerData?.profession || 'Profissão não informada'}
+                            {proposal?.provider?.providerData?.professions?.join(" | ") || 'Profissão não informada'}
                         </p>
 
                         <div className="flex items-center gap-2 text-sm text-gray-500">

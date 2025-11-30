@@ -24,7 +24,7 @@ export default function RegisterForm() {
             reference: "",
         },
         providerData: {
-            profession: "",
+            professions: [],
         },
     });
 
@@ -57,8 +57,8 @@ export default function RegisterForm() {
                     : houseNumber > 0;
             return !!(street.trim() && houseNumberValid);
         } else {
-            const { profession } = formData.providerData;
-            return !!(profession.trim());
+            const { professions } = formData.providerData;
+            return professions && professions.length > 0;
         }
     };
 
@@ -105,13 +105,25 @@ export default function RegisterForm() {
 
         if (name.startsWith('providerData.')) {
             const fieldName = name.replace('providerData.', '');
-            setFormData({
-                ...formData,
-                providerData: {
-                    ...formData.providerData,
-                    [fieldName]: value,
-                },
-            });
+            if (fieldName === 'professions' && e.target instanceof HTMLInputElement) {
+                const checked = e.target.checked;
+                const current = formData.providerData.professions || [];
+                const updated = checked
+                    ? [...current, value]
+                    : current.filter(p => p !== value);
+                setFormData({
+                    ...formData,
+                    providerData: { ...formData.providerData, professions: updated },
+                });
+            } else {
+                setFormData({
+                    ...formData,
+                    providerData: {
+                        ...formData.providerData,
+                        [fieldName]: value,
+                    },
+                });
+            }
         } else {
             setFormData({
                 ...formData,
@@ -161,7 +173,7 @@ export default function RegisterForm() {
 
             window.location.hash = "#/login";
 
-        } catch{
+        } catch {
             /**/
         } finally {
             setIsSubmitting(false);
@@ -219,8 +231,6 @@ export default function RegisterForm() {
                         </a>
                     </label>
                 </div>
-
-
 
                 {error && <p className="text-status-error text-sm mt-2">{error}</p>}
                 {success && <p className="text-status-success text-sm mt-2">{success}</p>}
