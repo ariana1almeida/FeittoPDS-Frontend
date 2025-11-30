@@ -1,3 +1,14 @@
+import { LightningIcon, PaintBrushHouseholdIcon, DropIcon, HammerIcon, WallIcon } from "@phosphor-icons/react";
+
+export const PROFESSION_ICONS = {
+    ELECTRICIAN: LightningIcon,
+    PAINTER: PaintBrushHouseholdIcon,
+    PLUMBER: DropIcon,
+    CARPENTER: HammerIcon,
+    MASON: WallIcon
+    //TODO Tem de adicionar as profissões e os ícones para os restantes
+} as const;
+
 export const CITIES: string[] = [
   "CAPAO_DA_CANOA",
   "XANGRI_LA", 
@@ -10,7 +21,7 @@ export const STATES: string[] = ["RS"];
 
 export const PROFESSIONS: string[] = [
   "ELECTRICIAN",
-  "PLUMBER", 
+  "PLUMBER",
   "CARPENTER",
   "PAINTER",
   "MASON",

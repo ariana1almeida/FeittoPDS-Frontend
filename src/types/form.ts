@@ -7,7 +7,7 @@ export interface ClientData {
 }
 
 export interface ProviderData {
-  profession: string;
+  professions: string[];
 }
 
 export interface FormData {

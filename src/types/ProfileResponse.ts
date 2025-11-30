@@ -20,5 +20,5 @@ export interface UserDataDto {
     street?: string;
     houseNumber?: number;
     reference?: string;
-    profession?: string;
+    professions?: string[];
 }

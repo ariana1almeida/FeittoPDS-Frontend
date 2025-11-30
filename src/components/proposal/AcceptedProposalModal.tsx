@@ -15,7 +15,10 @@ interface AcceptedProposalModalProps {
 export const AcceptedProposalModal = ({isOpen, onClose, proposal}: AcceptedProposalModalProps) => {
     if (!isOpen) return null;
     const providerName = `${proposal?.provider?.firstName} ${proposal?.provider?.lastName}`;
-    const providerProfession = proposal?.provider?.providerData?.profession;
+    const professions = proposal?.provider?.providerData?.professions;
+    const providerProfession = professions?.length
+        ? professions.join(', ')
+        : proposal?.provider?.providerData?.professions;
     const providerInitials = providerName.split(' ').map(n => n[0]).join('').substring(0, 2);
 
     const handleWhatsAppClick = () => {
