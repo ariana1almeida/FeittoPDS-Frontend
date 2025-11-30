@@ -41,8 +41,8 @@ export class ServiceService {
         return response.data as ServiceEntity;
     }
 
-    getAllServices = async (): Promise<ServiceEntity[]> => {
-        const response = await api.get("/services");
+    getAllServicesAvailableByProviderId = async (id: string | undefined): Promise<ServiceEntity[]> => {
+        const response = await api.get(`/services/provider/${id}`);
         return response.data as ServiceEntity[];
     };
 
