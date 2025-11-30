@@ -33,7 +33,7 @@ export default function ProviderHomePage() {
     const loadServices = useCallback(async () => {
         try {
             setLoadingServices(true);
-            const allServices = await serviceService.getAllServices();
+            const allServices = await serviceService.getAllServicesAvailableByProviderId(auth.authData?.id);
             setServices(allServices);
         } catch (error) {
             console.error("Erro ao carregar serviços:", error);
