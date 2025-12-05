@@ -1,10 +1,13 @@
 import {
+    ChatCircleDotsIcon,
     ClockIcon,
     CurrencyDollarIcon, StarIcon,
     WhatsappLogoIcon,
     XIcon
 } from "@phosphor-icons/react";
 import type {ProposalEntity} from "../../types/ProposalEntity";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
 interface AcceptedProposalModalProps {
     isOpen: boolean;
@@ -13,6 +16,9 @@ interface AcceptedProposalModalProps {
 }
 
 export const AcceptedProposalModal = ({isOpen, onClose, proposal}: AcceptedProposalModalProps) => {
+    const navigate = useNavigate();
+    const { authData } = useAuth();
+
     if (!isOpen) return null;
     const providerName = `${proposal?.provider?.firstName} ${proposal?.provider?.lastName}`;
     const professions = proposal?.provider?.providerData?.professions;
@@ -44,6 +50,30 @@ export const AcceptedProposalModal = ({isOpen, onClose, proposal}: AcceptedPropo
         const whatsappUrl = `https://wa.me/${sanitizedPhoneNumber}?text=${encoded}`;
 
         window.open(whatsappUrl, '_blank');
+    };
+
+    const handleChatClick = () => {
+        if (!authData || !proposal) return;
+
+        let targetId: string;
+
+        // Determine target ID based on user type
+        if (authData.userType === "CLIENT") {
+            console.log('proposal', proposal)
+            // If user is CLIENT, target is the PROVIDER
+            targetId = proposal?.provider?.firebaseUid;
+        } else {
+            // If user is PROVIDER, target is the CLIENT
+            targetId = proposal.service?.clientId || '';
+        }
+
+        if (!targetId) {
+            alert('Não foi possível identificar o destinatário.');
+            return;
+        }
+
+        // Navigate to chat page with query params
+        navigate(`/chat?targetId=${targetId}`);
     };
 
     return (
@@ -99,6 +129,20 @@ export const AcceptedProposalModal = ({isOpen, onClose, proposal}: AcceptedPropo
                             <span>Abrir WhatsApp</span>
                         </button>
                     </div>
+
+                    <div className="mt-4">
+                        <button
+                            onClick={handleChatClick}
+                            className="w-full bg-primary-dark text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center space-x-2 hover:bg-primary-dark/90 transition-colors"
+                        >
+                            <ChatCircleDotsIcon size={24} weight="fill"/>
+                            <span>Abrir Chat Interno</span>
+                        </button>
+                    </div>
+
+
+
+
 
                     <p className="text-xs text-neutral-dark text-center mt-4">
                         Uma mensagem automática será enviada para {providerName}

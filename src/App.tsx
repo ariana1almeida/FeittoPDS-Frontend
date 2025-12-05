@@ -13,6 +13,7 @@ import ResetPasswordPage from "./pages/ResetPasswordPage.tsx";
 import TermsOfUsePage from "./pages/TermsOfUsePage.tsx";
 import ProviderProposalsPage from "./pages/ProviderProposalsPage.tsx";
 import ServiceProposalsPage from "./pages/ServiceProposalsPage.tsx";
+import ChatPage from "./pages/ChatPage";
 
 export default function App() {
     return (
@@ -58,6 +59,7 @@ function AppContent() {
     return (
         <Routes>
             <Route path="/" element={<HomeRedirect/>}/>
+            <Route path="/chat" element={<ChatPage/>}></Route>
             <Route path="/login" element={<LoginPage/>}/>
             <Route path="/register" element={<RegisterPage/>}/>
             <Route path="/forgot-password" element={<ForgotPasswordPage/>}/>

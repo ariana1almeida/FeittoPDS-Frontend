@@ -136,24 +136,27 @@ export default function ProposalCard({proposal, service, onAccept, onCancel, onC
             <hr className="border-gray-200"/>
             {(service.status !== 'COMPLETED') ? (
                 proposal.accepted ? (
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-stretch gap-4 w-full">
                         <button
-                            className="flex items-center gap-2 rounded-lg border-2 px-3 py-1.5 border-green-400 bg-green-400 text-white hover:bg-white hover:text-green-400 transition-colors duration-200 text-sm"
-                            onClick={() => onClickChat(proposal)}>
+                            className="flex-1 min-h-[70px] flex flex-col items-center justify-center gap-2 rounded-lg border-2 border-green-400 bg-green-400 text-white hover:bg-white hover:text-green-400 transition-colors duration-200 text-sm text-center"
+                            onClick={() => onClickChat(proposal)}
+                        >
                             <WhatsappLogoIcon size={16}/>
-                            <span>Conversar no whatsapp </span>
+                            <span>Falar com prestador</span>
                         </button>
 
                         <button
-                            className="flex items-center gap-2 rounded-lg border-2 px-3 py-1.5 border-yellow-300 text-yellow-300 hover:bg-yellow-300 hover:text-white transition-colors duration-200 text-sm"
-                            onClick={() => onServiceConclusion(proposal)}>
+                            className="flex-1 min-h-[70px] flex flex-col items-center justify-center gap-2 rounded-lg border-2 border-yellow-300 text-yellow-300 hover:bg-yellow-300 hover:text-white transition-colors duration-200 text-sm text-center"
+                            onClick={() => onServiceConclusion(proposal)}
+                        >
                             <MedalIcon size={16}/>
                             <span>Confirmar serviço e avaliar</span>
                         </button>
 
                         <button
-                            className="flex items-center gap-2 rounded-lg border-2  px-3 py-1.5 border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition-colors duration-200 text-sm"
-                            onClick={() => onCancel(proposal)}>
+                            className="flex-1 min-h-[70px] flex flex-col items-center justify-center gap-2 rounded-lg border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition-colors duration-200 text-sm text-center"
+                            onClick={() => onCancel(proposal)}
+                        >
                             <XCircleIcon size={16}/>
                             <span>Cancelar</span>
                         </button>
