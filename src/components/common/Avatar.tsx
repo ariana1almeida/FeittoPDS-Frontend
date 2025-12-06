@@ -30,7 +30,7 @@ export function Avatar({className, image, alt = "", fallbackText = "", size = 'm
                 <AvatarPrimitive.Image
                     src={image}
                     alt={alt}
-                    className="aspect-square size-full object-cover"
+                    className="aspect-square size-full object-cover rounded-full"
                 />
             )}
             <AvatarPrimitive.Fallback

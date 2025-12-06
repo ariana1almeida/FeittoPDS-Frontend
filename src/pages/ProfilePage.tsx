@@ -6,7 +6,7 @@ import P from "../components/common/P.tsx";
 import {Tabs, TabsList, TabsTrigger, TabsContent} from "../components/common/Tabs";
 import ProfileAvatar from "../components/profile/ProfileAvatar.tsx";
 import PersonalInfoForm from "../components/profile/PersonalInfoForm.tsx";
-import AdvancedSettings from "../components/profile/AdvancedSettings.tsx";
+import UserRatings from "../components/profile/UserRatings.tsx";
 import type {ProfileResponse} from "../types/ProfileResponse.ts";
 import type {AuthContextType} from "../types/AuthContextType.ts";
 import {useState, useEffect} from "react";
@@ -84,7 +84,7 @@ export default function ProfilePage({auth}: ProfilePageProps) {
                         <Tabs defaultValue="personal" className="w-full">
                             <TabsList className="grid w-full grid-cols-2 mb-10 bg-muted">
                                 <TabsTrigger value="personal">Informações Pessoais</TabsTrigger>
-                                <TabsTrigger value="advanced">Configurações Avançadas</TabsTrigger>
+                                <TabsTrigger value="ratings">Avaliações</TabsTrigger>
                             </TabsList>
                             <TabsContent value="personal" className="space-y-10">
                                 <div className="flex flex-col space-y-3 items-center">
@@ -99,8 +99,8 @@ export default function ProfilePage({auth}: ProfilePageProps) {
                                     />
                                 </div>
                             </TabsContent>
-                            <TabsContent value="advanced" className="space-y-10">
-                                <AdvancedSettings/>
+                            <TabsContent value="ratings" className="space-y-10">
+                                <UserRatings/>
                             </TabsContent>
                         </Tabs>
                     </div>
