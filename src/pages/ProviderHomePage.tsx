@@ -40,7 +40,7 @@ export default function ProviderHomePage() {
         } finally {
             setLoadingServices(false);
         }
-    }, [serviceService]);
+    }, [serviceService, auth.authData?.id]);
 
     const handleOpenProposal = (service: ServiceEntity) => {
         setSelectedService(service);
@@ -69,10 +69,8 @@ export default function ProviderHomePage() {
     };
 
     useEffect(() => {
-        if (services.length === 0) {
-            loadServices();
-        }
-    }, [loadServices, serviceService, services]);
+        loadServices();
+    }, [loadServices]);
 
     return (
         <div className="min-h-screen w-full bg-neutral-light flex flex-col">
