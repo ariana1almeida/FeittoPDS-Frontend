@@ -7,7 +7,7 @@ export default function BackButton() {
         <div>
             <button
                 onClick={() => navigate("/")}
-                className="flex items-center text-primary-dark hover:bg-transparent mb-6"
+                className="flex items-center text-neutral-dark mb-6"
             >
                 <ArrowLeftIcon className="h-4 w-4 mr-2"/>
                 Voltar

@@ -1,12 +1,8 @@
 import RegisterForm from "../components/register/RegisterForm";
-import Header from "../components/common/Header.tsx";
-import Footer from "../components/common/Footer.tsx";
 
 function RegisterPage() {
     return (
         <div className="min-h-screen w-full bg-neutral-light flex flex-col">
-            <Header />
-
             <div className="flex-1 p-6">
                 <div className="space-y-4 justify-center">
                     <div className="flex justify-center">
@@ -14,8 +10,6 @@ function RegisterPage() {
                     </div>
                 </div>
             </div>
-
-            <Footer />
         </div>
     );
 }

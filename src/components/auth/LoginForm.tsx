@@ -61,15 +61,6 @@ export default function LoginForm() {
                     required
                     error={!password && !!error}
                 />
-                <div className="text-right">
-                    <button
-                        type="button"
-                        onClick={() => navigate('/forgot-password')}
-                        className="text-sm text-primary-medium hover:underline bg-transparent border-none cursor-pointer"
-                    >
-                        Esqueci minha senha
-                    </button>
-                </div>
                 {error && (
                     <p className="text-status-error text-sm mt-2" role="alert">
                         {error}

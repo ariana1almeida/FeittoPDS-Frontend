@@ -1,5 +1,4 @@
-import {Routes, Route, Navigate} from "react-router-dom";
-import {HashRouter} from "react-router-dom";
+import {HashRouter, Navigate, Route, Routes} from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import {HomePage} from "./pages/HomePage";
 import RegisterPage from "./pages/RegisterPage";
@@ -13,15 +12,16 @@ import ResetPasswordPage from "./pages/ResetPasswordPage.tsx";
 import TermsOfUsePage from "./pages/TermsOfUsePage.tsx";
 import ProviderProposalsPage from "./pages/ProviderProposalsPage.tsx";
 import ServiceProposalsPage from "./pages/ServiceProposalsPage.tsx";
+import Header from "./components/common/Header.tsx";
+import Footer from "./components/common/Footer.tsx";
+import './index.css';
 
 export default function App() {
-    return (
-        <HashRouter>
+    return (<HashRouter>
             <AuthProvider>
                 <AppContent/>
             </AuthProvider>
-        </HashRouter>
-    );
+        </HashRouter>);
 }
 
 function AppContent() {
@@ -30,7 +30,7 @@ function AppContent() {
 
         if (loading) {
             return <div
-                className="min-h-screen flex items-center justify-center bg-neutral-light text-primary-dark">Carregando...</div>;
+                className="min-h-screen flex items-center justify-center bg-neutral-light text-neutral-dark">Carregando...</div>;
         }
 
         if (!authData) {
@@ -45,7 +45,7 @@ function AppContent() {
 
         if (loading) {
             return <div
-                className="min-h-screen flex items-center justify-center bg-neutral-light text-primary-dark">Carregando...</div>;
+                className="min-h-screen flex items-center justify-center bg-neutral-light text-neutral-dark">Carregando...</div>;
         }
 
         if (authData?.userType) {
@@ -55,48 +55,44 @@ function AppContent() {
         return <HomePage/>;
     }
 
-    return (
-        <Routes>
-            <Route path="/" element={<HomeRedirect/>}/>
-            <Route path="/login" element={<LoginPage/>}/>
-            <Route path="/register" element={<RegisterPage/>}/>
-            <Route path="/forgot-password" element={<ForgotPasswordPage/>}/>
-            <Route path="/reset-password" element={<ResetPasswordPage/>}/>
-            <Route path="/terms" element={<TermsOfUsePage/>}/>
-            <Route path="/service/:serviceId/proposals" element={<ServiceProposalsPage />} />
+    return (<div className="flex flex-col min-h-screen">
+            <Header/>
+            <main className="flex-1">
+                <Routes>
+                    <Route path="/" element={<HomeRedirect/>}/>
+                    <Route path="/login" element={<LoginPage/>}/>
+                    <Route path="/register" element={<RegisterPage/>}/>
+                    <Route path="/forgot-password" element={<ForgotPasswordPage/>}/>
+                    <Route path="/reset-password" element={<ResetPasswordPage/>}/>
+                    <Route path="/terms" element={<TermsOfUsePage/>}/>
+                    <Route path="/service/:serviceId/proposals" element={<ServiceProposalsPage/>}/>
 
-            <Route
-                path="/client/home"
-                element={
-                    <ProtectedRoute userType="CLIENT">
-                        <ClientHomePage/>
-                    </ProtectedRoute>
-                }
-            />
-            <Route
-                path="/profile"
-                element={
-                    <ProtectedRoute>
-                        <ProfilePage auth={useAuth()}/>
-                    </ProtectedRoute>
-                }
-            />
-            <Route
-                path="/provider/home"
-                element={
-                    <ProtectedRoute userType="PROVIDER">
-                        <ProviderHomePage/>
-                    </ProtectedRoute>
-                }
-            />
-            <Route path="/provider/proposals"
-                   element={
-                       <ProtectedRoute userType="PROVIDER">
-                           <ProviderProposalsPage/>
-                       </ProtectedRoute>
-                   }
-            />
-            <Route path="*" element={<HomePage/>}/>
-        </Routes>
-    );
+                    <Route
+                        path="/client/home"
+                        element={<ProtectedRoute userType="CLIENT">
+                            <ClientHomePage/>
+                        </ProtectedRoute>}
+                    />
+                    <Route
+                        path="/profile"
+                        element={<ProtectedRoute>
+                            <ProfilePage auth={useAuth()}/>
+                        </ProtectedRoute>}
+                    />
+                    <Route
+                        path="/provider/home"
+                        element={<ProtectedRoute userType="PROVIDER">
+                            <ProviderHomePage/>
+                        </ProtectedRoute>}
+                    />
+                    <Route path="/provider/proposals"
+                           element={<ProtectedRoute userType="PROVIDER">
+                               <ProviderProposalsPage/>
+                           </ProtectedRoute>}
+                    />
+                    <Route path="*" element={<HomePage/>}/>
+                </Routes>
+            </main>
+            <Footer/>
+        </div>);
 }

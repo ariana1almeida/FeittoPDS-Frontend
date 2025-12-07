@@ -1,6 +1,4 @@
 import {useState, useEffect, useCallback} from "react";
-import Header from "../components/common/Header.tsx";
-import Footer from "../components/common/Footer.tsx";
 import CreateServiceModal from "../components/service/CreateServiceModal.tsx";
 import ServiceCard from "../components/service/ServiceCard.tsx";
 import {useAuth} from "../hooks/useAuth.ts";
@@ -86,7 +84,6 @@ export default function ClientHomePage() {
 
     return (
         <div className="min-h-screen w-full bg-neutral-light flex flex-col">
-            <Header/>
 
             <div className="flex-1 px-4 py-6">
                 <div className="w-full max-w-2xl mx-auto mt-4">
@@ -133,7 +130,6 @@ export default function ClientHomePage() {
                     )}
                 </div>
             </div>
-            <Footer/>
             <CreateServiceModal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}

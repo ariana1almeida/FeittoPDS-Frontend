@@ -1,5 +1,3 @@
-import Header from "../components/common/Header.tsx";
-import Footer from "../components/common/Footer.tsx";
 import BackButton from "../components/common/BackButton.tsx";
 import H1 from "../components/common/H1.tsx";
 import TermsContent from "../components/terms/TermsContent.tsx";
@@ -11,7 +9,6 @@ export default function TermsOfUsePage() {
 
     return (
         <div className="min-h-screen flex flex-col bg-neutral-light">
-            <Header />
             <div className="flex flex-col flex-1 max-w-7xl mx-auto w-full">
                 <div className="max-w-7xl px-8 py-12 h-16 flex items-center justify-start">
                     <BackButton />
@@ -47,7 +44,6 @@ export default function TermsOfUsePage() {
                     </div>
                 </div>
             </div>
-            <Footer />
         </div>
     );
 }

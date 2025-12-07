@@ -1,7 +1,5 @@
 import {useState, useEffect, useCallback} from "react";
 import {useParams} from "react-router-dom";
-import Header from "../components/common/Header";
-import Footer from "../components/common/Footer";
 import BackButton from "../components/common/BackButton";
 import ProposalCard from "../components/proposal/ProposalCard";
 import {AcceptedProposalModal} from "../components/proposal/AcceptedProposalModal";
@@ -120,8 +118,6 @@ export default function ServiceProposalsPage() {
 
     return (
         <div className="min-h-screen w-full bg-neutral-light flex flex-col">
-            <Header/>
-
             <div className="flex-1 px-4 py-6">
                 <div className="w-full max-w-2xl mx-auto">
                     <BackButton/>
@@ -185,7 +181,6 @@ export default function ServiceProposalsPage() {
                 subject="prestador"
                 onSubmit={handleSubmitConclusion}
             />
-            <Footer/>
         </div>
     );
 }

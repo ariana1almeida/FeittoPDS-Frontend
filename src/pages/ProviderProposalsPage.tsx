@@ -1,8 +1,6 @@
-import Header from "../components/common/Header.tsx";
 import {useCallback, useEffect, useState} from "react";
 import {ProposalService} from "../services/ProposalService.ts";
 import type {ProposalEntity} from "../types/ProposalEntity.ts";
-import Footer from "../components/common/Footer.tsx";
 import BackButton from "../components/common/BackButton.tsx";
 import {useAuth} from "../hooks/useAuth.ts";
 import {ClockIcon, MoneyIcon} from "@phosphor-icons/react";
@@ -125,7 +123,6 @@ export default function ProviderProposalsPage() {
     };
 
     return (<div className="min-h-screen w-full bg-neutral-light flex flex-col">
-            <Header/>
             <div className="max-w-7xl px-8 py-12 h-16 flex items-center justify-start">
                 <BackButton/>
             </div>
@@ -210,7 +207,7 @@ export default function ProviderProposalsPage() {
 
                                         {svcStatus === 'COMPLETED' && (<button
                                                 onClick={() => openRatingModal(proposal)}
-                                                className="px-4 py-2 rounded-lg text-sm font-medium text-primary-darl bg-accent-yellow rounded-md hover:bg-accent-yellow-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-200">
+                                                className="px-4 py-2 rounded-lg text-sm font-medium text-primary-darl bg-accent-yellow hover:bg-accent-yellow-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-200">
                                                 Avaliar Cliente
                                             </button>)}
                                     </div>
@@ -228,6 +225,5 @@ export default function ProviderProposalsPage() {
                 subject="cliente"
                 onSubmit={handleSubmitRating}
             />
-            <Footer/>
         </div>);
 }

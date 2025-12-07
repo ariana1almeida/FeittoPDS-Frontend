@@ -34,3 +34,10 @@ html, body {
     background: white;
     color: var(--color-neutral-medium);
 }
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
