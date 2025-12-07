@@ -1,5 +1,3 @@
-import Header from "../components/common/Header.tsx";
-import Footer from "../components/common/Footer.tsx";
 import BackButton from "../components/common/BackButton.tsx";
 import H1 from "../components/common/H1.tsx";
 import P from "../components/common/P.tsx";
@@ -68,21 +66,20 @@ export default function ProfilePage({auth}: ProfilePageProps) {
 
     return (
         <div className="min-h-screen flex flex-col bg-neutral-light">
-            <Header/>
             <div className="flex flex-col flex-1 max-w-7xl mx-auto w-full">
                 <div className="max-w-7xl px-8 py-12 h-16 flex items-center justify-start">
                     <BackButton/>
                 </div>
                 <div className="flex flex-col justify-start items-center flex-1 px-4">
-                    <H1 className="text-primary-dark">Meu Perfil</H1>
-                    <P className="text-primary-dark/80">
+                    <H1 className="text-neutral-dark">Meu Perfil</H1>
+                    <P className="text-neutral-dark/80">
                         {isProvider
                             ? "Gerencie suas informações profissionais"
                             : "Gerencie suas informações pessoais e preferências"}
                     </P>
-                    <div className="bg-white m-40 mt-8 p-8 rounded-lg shadow-md w-full max-w-3xl">
+                    <div className="bg-white m-40 mt-8 p-8 rounded-lg w-full max-w-3xl">
                         <Tabs defaultValue="personal" className="w-full">
-                            <TabsList className="grid w-full grid-cols-2 mb-10 bg-muted">
+                            <TabsList className="grid w-full grid-cols-2 mb-10 bg-muted text-neutral-dark">
                                 <TabsTrigger value="personal">Informações Pessoais</TabsTrigger>
                                 <TabsTrigger value="ratings">Avaliações</TabsTrigger>
                             </TabsList>
@@ -106,7 +103,6 @@ export default function ProfilePage({auth}: ProfilePageProps) {
                     </div>
                 </div>
             </div>
-            <Footer/>
         </div>
     );
 }

@@ -42,7 +42,7 @@ export default function Input({
     return (
         <div className="mb-6">
             {label && (
-                <label htmlFor={name} className="mb-1 block text-sm font-medium text-primary-dark">
+                <label htmlFor={name} className="mb-1 block text-sm font-medium text-neutral-dark">
                     {label}
                     {required && <span className="text-status-error ml-1">*</span>}
                 </label>
@@ -69,8 +69,8 @@ export default function Input({
                     className={`w-full h-9 ${paddingClass} py-2 rounded-lg text-sm ${
                         error
                             ? "bg-red-50 border-2 border-status-error focus:border-status-error focus:ring-2 focus:ring-status-error/20"
-                            : "bg-neutral-light border-2 border-transparent focus:bg-white focus:border-accent-yellow focus:ring-2 focus:ring-accent-yellow/20"
-                    } text-primary-dark placeholder-neutral-dark/60 focus:outline-none`}
+                            : "bg-neutral-light border-2 border-transparent focus:ring-2 focus:ring-neutral-medium"
+                    } text-neutral-dark placeholder-neutral-dark/60 focus:outline-none`}
                     {...rest}
                 />
 
