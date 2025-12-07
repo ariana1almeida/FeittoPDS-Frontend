@@ -63,7 +63,8 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
         <div ref={dropdownRef}>
             <label className="mb-1 block text-sm font-medium text-neutral-dark">
                 {label}
-            </label>
+                <span className="text-status-error ml-1">*</span>
+              </label>
 
             <div className="relative">
                 <button

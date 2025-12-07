@@ -12,7 +12,7 @@ export default function FormSection({
   return (
     <div className={className}>
       {title && (
-        <h2 className="text-xl font-semibold mb-4 text-primary-dark">
+        <h2 className="text-sm font-medium mb-2 text-neutral-dark">
           {title}
         </h2>
       )}

@@ -40,7 +40,7 @@ export default function Input({
                 : "px-4";
 
     return (
-        <div className="mb-6">
+        <div>
             {label && (
                 <label htmlFor={name} className="mb-1 block text-sm font-medium text-neutral-dark">
                     {label}
