@@ -31,11 +31,11 @@ export default function LoginForm() {
 
     return (
         <div className="max-w-md w-full mx-auto p-4 sm:p-6 bg-white rounded-lg shadow-md">
-            <h1 className="text-4xl font-bold mb-4 text-center text-primary-dark">
-                Bem-vindo de volta!
+            <h1 className="text-3xl font-bold mb-2 text-center text-neutral-dark">
+                Bem-vindo de volta
             </h1>
-            <p className="text-lg mb-4 font-light text-center text-primary-dark">
-                Entre na sua conta para continuar
+            <p className=" mb-4 font-light text-center text-neutral-medium">
+                Entre com suas credenciais
             </p>
             <form onSubmit={handleSubmit} className="space-y-6">
                 <Input
@@ -78,7 +78,7 @@ export default function LoginForm() {
                 Não possui conta?{" "}
                 <button
                     onClick={() => navigate('/register')}
-                    className="text-primary-medium font-medium hover:underline bg-transparent border-none cursor-pointer"
+                    className="text-primary-dark font-bold hover:underline bg-transparent border-none cursor-pointer"
                 >
                     Cadastre-se gratuitamente
                 </button>

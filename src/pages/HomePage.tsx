@@ -27,13 +27,13 @@ export function HomePage() {
                             </p>
                             <div className="flex py-8 justify-start gap-4 max-w-sm">
                                 <button
-                                    onClick={() => navigateTo('/login')}
+                                    onClick={() => navigateTo('/register')}
                                     className="text-white bg-primary-dark font-bold px-6 py-4 rounded-2xl hover:bg-primary-medium transition-colors flex flex-row items-center justify-center gap-2 min-w-30 flex-1"
                                 >
                                     Comece agora <ArrowRightIcon size={16}/>
                                 </button>
                                 <button
-                                    onClick={() => navigateTo('/register')}
+                                    onClick={() => navigateTo('/login')}
                                     className="bg-accent-green text-neutral-dark font-bold px-6 py-4 rounded-2xl hover:bg-accent-green-hover transition-colors min-w-30 flex-1"
                                 >
                                     Já tenho conta
