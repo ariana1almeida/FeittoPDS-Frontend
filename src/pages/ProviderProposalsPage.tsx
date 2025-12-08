@@ -207,7 +207,7 @@ export default function ProviderProposalsPage() {
 
                                         {svcStatus === 'COMPLETED' && (<button
                                                 onClick={() => openRatingModal(proposal)}
-                                                className="px-4 py-2 rounded-lg text-sm font-medium text-primary-darl bg-accent-yellow hover:bg-accent-yellow-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-200">
+                                                className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-primary-dark hover:bg-accent-yellow-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-200">
                                                 Avaliar Cliente
                                             </button>)}
                                     </div>

@@ -9,7 +9,7 @@ export default function Footer() {
 
     return (
         <footer className="w-full bg-neutral-dark text-white py-8 px-10">
-            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="max-w-7xl mx-3 flex flex-col md:flex-row md:justify-between items-start gap-8">
                 <div className="flex flex-col gap-4">
                     <div className="flex items-center gap-2">
                         <img src={LogoWhite} alt="FEITTO" className="h-8 w-auto" />
@@ -27,42 +27,44 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="flex flex-col gap-3">
-                    <h3 className="font-bold text-lg mb-2">LINKS</h3>
-                    <button
-                        onClick={() => {
-                            navigate('/');
-                            setTimeout(() => {
-                                document.getElementById('servicos')?.scrollIntoView({ behavior: 'smooth' });
-                            }, 100);
-                        }}
-                        className="text-left text-sm text-neutral-300 hover:text-white transition-colors"
-                    >
-                        Nossos Serviços
-                    </button>
-                    <button
-                        onClick={() => {
-                            navigate('/');
-                            setTimeout(() => {
-                                document.getElementById('funciona')?.scrollIntoView({ behavior: 'smooth' });
-                            }, 100);
-                        }}
-                        className="text-left text-sm text-neutral-300 hover:text-white transition-colors"
-                    >
-                        Como Funciona
-                    </button>
-                    <button
-                        onClick={() => {
-                            navigate('/');
-                            setTimeout(() => {
-                                document.getElementById('motivos')?.scrollIntoView({ behavior: 'smooth' });
-                            }, 100);
-                        }}
-                        className="text-left text-sm text-neutral-300 hover:text-white transition-colors"
-                    >
-                        Por que escolher a FEITTO?
-                    </button>
-                </div>
+                {!(localStorage.getItem('token') || !localStorage.getItem('accessToken') || !localStorage.getItem('auth')) && (
+                    <div className="flex flex-col gap-3">
+                        <h3 className="font-bold text-lg mb-2">LINKS</h3>
+                        <button
+                            onClick={() => {
+                                navigate('/');
+                                setTimeout(() => {
+                                    document.getElementById('servicos')?.scrollIntoView({ behavior: 'smooth' });
+                                }, 100);
+                            }}
+                            className="text-left text-sm text-neutral-300 hover:text-white transition-colors"
+                        >
+                            Nossos Serviços
+                        </button>
+                        <button
+                            onClick={() => {
+                                navigate('/');
+                                setTimeout(() => {
+                                    document.getElementById('funciona')?.scrollIntoView({ behavior: 'smooth' });
+                                }, 100);
+                            }}
+                            className="text-left text-sm text-neutral-300 hover:text-white transition-colors"
+                        >
+                            Como Funciona
+                        </button>
+                        <button
+                            onClick={() => {
+                                navigate('/');
+                                setTimeout(() => {
+                                    document.getElementById('motivos')?.scrollIntoView({ behavior: 'smooth' });
+                                }, 100);
+                            }}
+                            className="text-left text-sm text-neutral-300 hover:text-white transition-colors"
+                        >
+                            Por que escolher a FEITTO?
+                        </button>
+                    </div>
+                )}
 
                 <div className="flex flex-col gap-3">
                     <h3 className="font-bold text-lg mb-2">CONTATO</h3>

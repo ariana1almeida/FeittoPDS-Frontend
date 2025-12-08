@@ -1,14 +1,37 @@
 import { useAuth } from '../../hooks/useAuth.ts';
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import { useNavigate } from "react-router-dom";
 import Logo from '../../assets/Logo.svg';
 import {UserIcon, SignOutIcon, HouseIcon, XIcon, ListIcon} from '@phosphor-icons/react';
+import {CLIENT_TYPES} from "../../constants/formData.ts";
+import {UserService} from "../../services/UserService.ts";
 
 export default function Header() {
     const { authData, logout } = useAuth();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [userData, setUserData] = useState<any>(null);
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
     const navigate = useNavigate();
+    const userService = UserService.getInstance();
+
+    const getProfileData = async () => {
+        if (authData?.token) {
+            try{
+                setUserData(await userService.getUserProfileInformation(authData.id))
+            }catch (e: any) {
+                console.error('Error fetching user data:', e);
+            }
+        }
+    };
+
+    useEffect(() => {
+        getProfileData();
+    }, [authData?.token]);
+
+
+    const firstName = userData?.firstName?.split(' ')[0] || authData?.userType;
+    const userInitial = firstName?.charAt(0).toUpperCase() || 'U';
+
 
     return (
         <header className="w-full flex items-center justify-between px-10 py-4 bg-white shadow">
@@ -119,14 +142,11 @@ export default function Header() {
 
                                 <div className="flex items-center gap-3 p-3 bg-neutral-light rounded-lg mb-6">
                                     <div className="w-10 h-10 rounded-lg bg-primary-dark flex items-center justify-center text-white font-bold">
-                                        {authData.userType.charAt(0).toUpperCase()}
-                                        {/*TODO: foto de perfil*/}
+                                        {userInitial}
                                     </div>
                                     <div>
-                                        <p className="font-semibold text-neutral-dark">{authData.userType}</p>
-                                        {/*TODO: primeiro nome do usuário*/}
-                                        <p className="text-sm font-regular text-neutral-medium">{authData.userType}</p>
-                                        {/*TODO: printar Cliente ao invés de Client*/}
+                                        <p className="font-semibold text-neutral-dark">{firstName}</p>
+                                        <p className="text-sm font-regular text-neutral-medium">{CLIENT_TYPES[authData.userType]}</p>
                                     </div>
                                 </div>
 
