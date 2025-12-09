@@ -40,7 +40,7 @@ export default function ProviderForm({
                                   value={opt.value}
                                   checked={professionsSelected.includes(opt.value)}
                                   onChange={onChange}
-                                  className="h-4 w-4 rounded border-neutral-medium accent-accent-yellow cursor-pointer"
+                                  className="h-4 w-4 rounded border-neutral-medium accent-primary-dark cursor-pointer"
                               />
                               {Icon && <Icon size={18} className="text-neutral-dark" aria-hidden="true" />}
                               <span className="text-sm font-medium text-neutral-dark">{opt.label}</span>

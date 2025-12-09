@@ -164,7 +164,7 @@ const CreateServiceModal = ({
                             <div
                                 className={`relative w-full h-40 sm:h-48 rounded-lg flex items-center justify-center cursor-pointer
                                     ${errors.picture ? 'border-2 border-status-error bg-red-50' : 'border-2 border-dashed border-neutral-medium bg-neutral-light'}
-                                    hover:border-accent-yellow hover:bg-neutral-100 transition-colors`}
+                                    hover:border-primary-dark hover:bg-neutral-100 transition-colors`}
                                 onClick={() => fileInputRef.current?.click()}
                             >
                                 {imagePreview ? (<img src={imagePreview} alt="Pré-visualização"
@@ -181,7 +181,7 @@ const CreateServiceModal = ({
                                     className="hidden"
                                 />
                                 {imagePreview && (<div
-                                        className="absolute bottom-2 right-2 bg-accent-green rounded-full p-2 shadow-lg">
+                                        className="absolute bottom-2 right-2 bg-primary-dark rounded-full p-2 shadow-lg">
                                         <CameraIcon className="h-4 w-4 sm:h-5 sm:w-5 text-white"/>
                                     </div>)}
                             </div>

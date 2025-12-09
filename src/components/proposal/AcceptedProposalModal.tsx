@@ -5,6 +5,7 @@ import {
     XIcon
 } from "@phosphor-icons/react";
 import type {ProposalEntity} from "../../types/ProposalEntity";
+import {Avatar} from "../common/Avatar.tsx";
 
 interface AcceptedProposalModalProps {
     isOpen: boolean;
@@ -15,11 +16,6 @@ interface AcceptedProposalModalProps {
 export const AcceptedProposalModal = ({isOpen, onClose, proposal}: AcceptedProposalModalProps) => {
     if (!isOpen) return null;
     const providerName = `${proposal?.provider?.firstName} ${proposal?.provider?.lastName}`;
-    const professions = proposal?.provider?.providerData?.professions;
-    const providerProfession = professions?.length
-        ? professions.join(', ')
-        : proposal?.provider?.providerData?.professions;
-    const providerInitials = providerName.split(' ').map(n => n[0]).join('').substring(0, 2);
 
     const handleWhatsAppClick = () => {
         const rawPhone = proposal?.provider?.phone;
@@ -38,7 +34,7 @@ export const AcceptedProposalModal = ({isOpen, onClose, proposal}: AcceptedPropo
 
         const serviceTitle = proposal?.service?.title || '';
         const providerName = `${proposal?.provider?.firstName ?? ''} ${proposal?.provider?.lastName ?? ''}`.trim();
-        const message = `Olá ${providerName || ''}, gostaria de falar sobre a proposta${serviceTitle ? ` para o serviço "${serviceTitle}"` : ''}.`;
+        const message = `Olá ${providerName || ''}, gostaria de falar sobre a proposta ${serviceTitle ? ` para o serviço "${serviceTitle}". A oferta foi de R$${proposal?.estimatedPrice}, e o tempo estimado foi de ${proposal?.estimatedDays} dia(s)` : ''}.`;
         const encoded = encodeURIComponent(message);
 
         const whatsappUrl = `https://wa.me/${sanitizedPhoneNumber}?text=${encoded}`;
@@ -47,47 +43,47 @@ export const AcceptedProposalModal = ({isOpen, onClose, proposal}: AcceptedPropo
     };
 
     return (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-lg shadow-xl w-full max-w-xl">
+        <div className="fixed inset-0 bg-neutral-medium/50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-lg w-full max-w-xl">
                 <div className="p-6 relative">
                     <button onClick={onClose}
-                            className="absolute top-4 right-4 text-neutral-dark hover:text-primary-dark">
+                            className="absolute top-4 right-4 text-neutral-dark hover:text-neutral-medium">
                         <XIcon size={20}/>
                     </button>
 
-                    <h2 className="text-xl font-bold text-primary-dark">Contato do Prestador</h2>
+                    <h2 className="text-xl font-bold neutral-dark">Contato do Prestador</h2>
                     <p className="text-sm text-neutral-dark mb-6">Entre em contato com {providerName} pelo WhatsApp</p>
 
                     <div className="flex items-center space-x-4 mb-6">
-                        <div
-                            className="w-14 h-14 rounded-full bg-primary-dark flex items-center justify-center text-white font-bold text-xl">
-                            {providerInitials}
-                        </div>
+                        <Avatar
+                            image={proposal?.provider?.picture || ''}
+                            alt={proposal?.provider?.firstName}
+                            size="md"
+                            fallbackText={proposal?.provider?.name}
+                            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex-shrink-0"
+                        />
                         <div>
-                            <h3 className="font-semibold text-primary-dark">{providerName}</h3>
-                            <p className="text-sm text-neutral-dark">{providerProfession}</p>
+                            <h3 className="font-semibold text-neutral-dark">{providerName}</h3>
                             <div className="flex items-center text-sm text-neutral-dark mt-1">
-                                <StarIcon weight="fill" className="text-accent-yellow mr-1"/>
+                                <StarIcon weight="fill" className="text-yellow-500 mr-1"/>
                                 <span className="font-bold">{proposal?.provider?.averageRating}</span>
                                 <span className="ml-1">({proposal?.provider?.numberOfRatings} avaliações)</span>
                             </div>
                         </div>
                     </div>
 
-                    <hr className="border-gray-200 my-4"/>
-
-                    <div className="space-y-3 text-primary-dark mb-6">
+                    <div className="space-y-3 text-neutral-dark mb-6">
                         <div className="flex items-center">
                             <CurrencyDollarIcon size={24} className="text-neutral-dark mr-3"/>
                             <span>Valor: <span className="font-bold">R$ { proposal?.estimatedPrice?.toFixed(2)}</span></span>
                         </div>
                         <div className="flex items-center">
                             <ClockIcon size={24} className="text-neutral-dark mr-3"/>
-                            <span>Prazo: <span className="font-bold">{ proposal?.estimatedDays}</span></span>
+                            <span>Prazo: <span className="font-bold">{ proposal?.estimatedDays} dia(s)</span></span>
                         </div>
                     </div>
 
-                    <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-center">
+                    <div className="bg-accent-green/50 border border-accent-green rounded-lg p-4 text-center">
                         <p className="text-sm text-neutral-dark mb-3">
                             Clique no botão abaixo para iniciar uma conversa no WhatsApp com o prestador.
                         </p>

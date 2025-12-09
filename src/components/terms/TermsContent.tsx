@@ -135,7 +135,7 @@ export default function TermsContent() {
             <TermsSection title="12. Contato">
                 <p>
                     Em caso de dúvidas, entre em contato conosco pelo e-mail:<br />
-                    📧 <a href="mailto:contato@feitto.com.br" className="text-accent-yellow hover:underline">
+                    📧 <a href="mailto:contato@feitto.com.br" className="text-primary-dark hover:underline">
                     contato@feitto.com.br
                 </a>
                 </p>

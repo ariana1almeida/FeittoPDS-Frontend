@@ -92,7 +92,7 @@ export default function PrivacyContent() {
                 </ul>
                 <p className="mt-3">
                     Esses pedidos podem ser feitos pelo e-mail:{' '}
-                    <a href="mailto:contato@feitto.com.br" className="text-accent-yellow hover:underline">
+                    <a href="mailto:contato@feitto.com.br" className="text-primary-dark hover:underline">
                         📧 contato@feitto.com.br
                     </a>
                 </p>
@@ -133,7 +133,7 @@ export default function PrivacyContent() {
                 <p>
                     Em caso de dúvidas sobre esta Política ou sobre o tratamento dos seus dados pessoais, entre em contato
                     com nosso Encarregado de Proteção de Dados (DPO):<br />
-                    📧 <a href="mailto:contato@feitto.com.br" className="text-accent-yellow hover:underline">
+                    📧 <a href="mailto:contato@feitto.com.br" className="text-primary-dark hover:underline">
                     contato@feitto.com.br
                 </a>
                 </p>

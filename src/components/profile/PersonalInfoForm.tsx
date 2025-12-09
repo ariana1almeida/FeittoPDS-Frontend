@@ -56,8 +56,17 @@ export default function PersonalInfoForm({updateData, setUpdateData, onSubmit, i
 
             <div className="grid grid-cols-2 gap-4">
                 <div>
-                    <label className="block text-sm font-medium text-neutral-dark mb-1">Estado</label>
-                    <Input name="" value={updateData?.state ?? ""} readOnly={true}/>
+                    <CustomSelect
+                        label="Estado"
+                        name="state"
+                        value={updateData.state ?? ""}
+                        options={[{value: updateData.state ?? "", label: updateData.state ?? ""}]}
+                        placeholder="Estado"
+                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                            const {name, value} = e.target;
+                            setUpdateData(prev => ({...(prev || {}), [name]: value}));
+                        }}
+                    />
                 </div>
                 <div>
                     <label>
@@ -76,21 +85,19 @@ export default function PersonalInfoForm({updateData, setUpdateData, onSubmit, i
                 </div>
             </div>
 
-            {isProvider && (
-                <div className="mb-12">
-                    <label className="block text-sm font-medium text-neutral-dark mb-1">Bairro</label>
-                    <Input
-                        name=""
-                        value={updateData?.neighborhood ?? ""}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                            setUpdateData(prev => ({
-                                ...(prev || {}),
-                                userData: {...(prev?.userData || {}), neighborhood: e.target.value}
-                            }));
-                        }}
-                    />
-                </div>
-            )}
+            <div className="mb-12">
+                <label className="block text-sm font-medium text-neutral-dark mb-1">Bairro</label>
+                <Input
+                    name=""
+                    value={updateData?.neighborhood ?? ""}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        setUpdateData(prev => ({
+                            ...(prev || {}),
+                            neighborhood: e.target.value
+                        }));
+                    }}
+                />
+            </div>
 
             {!isProvider && (
                 <>
