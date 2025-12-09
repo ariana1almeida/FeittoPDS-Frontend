@@ -164,7 +164,7 @@ const CreateServiceModal = ({
                             <div
                                 className={`relative w-full h-40 sm:h-48 rounded-lg flex items-center justify-center cursor-pointer
                                     ${errors.picture ? 'border-2 border-status-error bg-red-50' : 'border-2 border-dashed border-neutral-medium bg-neutral-light'}
-                                    hover:border-accent-yellow hover:bg-neutral-100 transition-colors`}
+                                    hover:border-primary-dark hover:bg-neutral-100 transition-colors`}
                                 onClick={() => fileInputRef.current?.click()}
                             >
                                 {imagePreview ? (<img src={imagePreview} alt="Pré-visualização"

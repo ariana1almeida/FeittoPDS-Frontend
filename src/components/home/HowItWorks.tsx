@@ -49,8 +49,8 @@ export function HowItWorks() {
                         >
                             <div className="text-center">
                                 <div className="relative inline-block mb-6">
-                                    <div className="w-20 h-20 bg-accent-yellow rounded-full flex items-center justify-center shadow-lg">
-                                        <step.icon className="h-10 w-10 text-primary-dark" />
+                                    <div className="w-20 h-20 bg-primary-dark rounded-full flex items-center justify-center shadow-lg">
+                                        <step.icon className="h-10 w-10 text-white" />
                                     </div>
                                     <div className="absolute -top-2 -right-2 w-8 h-8 bg-primary-dark text-white rounded-full flex items-center justify-center shadow-md">
                                         {index + 1}
@@ -64,7 +64,7 @@ export function HowItWorks() {
                                 </p>
                             </div>
                             {index < steps.length - 1 && (
-                                <div className="hidden md:block absolute top-10 left-[60%] w-[80%] h-0.5 bg-gradient-to-r from-accent-yellow to-transparent" />
+                                <div className="hidden md:block absolute top-10 left-[60%] w-[80%] h-0.5 bg-gradient-to-r from-primary-dark to-transparent" />
                             )}
                         </motion.div>
                     ))}

@@ -89,7 +89,7 @@ const CreateProposalModal = ({
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div className="fixed inset-0 bg-neutral-medium/50 flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-lg shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto">
                 <div className="p-6">
                     <ModalHeader
@@ -99,8 +99,8 @@ const CreateProposalModal = ({
                     />
 
                     {serviceTitle && (
-                        <p className="text-sm text-primary-dark mb-4">
-                            Para: <span className="font-semibold">{serviceTitle}</span>
+                        <p className="text-sm text-neutral-dark mb-4">
+                            Para: <span className="font-semibold text-primary-dark ">{serviceTitle}</span>
                         </p>
                     )}
 
@@ -110,7 +110,7 @@ const CreateProposalModal = ({
                             label="Tempo Estimado (em dias)"
                             type="number"
                             placeholder="Ex: 5"
-                            value={formData.estimatedDays}
+                            value={formData.estimatedDays === 0 ? '' : formData.estimatedDays}
                             onChange={(e) => {
                                 const val = (e.target as HTMLInputElement).valueAsNumber;
                                 handleInputChange("estimatedDays", Number.isFinite(val) ? val : 0);
@@ -126,7 +126,7 @@ const CreateProposalModal = ({
                             step="0.01"
                             min="0"
                             placeholder="Ex: 150.00"
-                            value={formData.estimatedPrice}
+                            value={formData.estimatedPrice === 0 ? '' : formData.estimatedPrice}
                             onChange={(e) => {
                                 const val = (e.target as HTMLInputElement).valueAsNumber;
                                 handleInputChange("estimatedPrice", Number.isFinite(val) ? val : 0);
@@ -134,6 +134,7 @@ const CreateProposalModal = ({
                             error={errors.estimatedPrice}
                             required
                         />
+
 
                         <Textarea
                             name="descricao"
@@ -146,11 +147,11 @@ const CreateProposalModal = ({
                             className="text-sm"
                         />
 
-                        <div className="flex flex-row justify-between gap-4">
+                        <div className="flex flex-row w-full justify-between gap-4">
                             <button
                                 type="button"
                                 onClick={handleClose}
-                                className="w-40 bg-white border border-gray-300 text-neutral-dark py-3 px-6 rounded-lg font-semibold text-sm
+                                className="w-full bg-white border border-gray-300 text-neutral-dark py-3 px-6 rounded-lg font-semibold text-sm
                             hover:bg-gray-50 transition-all duration-200 mt-6 shadow-sm hover:shadow-md
                             focus:ring-2 focus:ring-gray-300/20 focus:outline-none">
                                 Cancelar
@@ -159,10 +160,10 @@ const CreateProposalModal = ({
                             <button
                                 type="button"
                                 onClick={handleSubmit}
-                                className={`w-40 bg-accent-yellow text-primary-dark py-3 px-6 rounded-lg font-semibold text-sm
-                                hover:bg-accent-yellow-hover disabled:opacity-50 disabled:cursor-not-allowed
+                                className={`w-full bg-primary-dark text-white py-3 px-6 rounded-lg font-semibold text-sm
+                                hover:bg-primary-medium-hover disabled:opacity-50 disabled:cursor-not-allowed
                                 transition-all duration-200 mt-6 shadow-sm hover:shadow-md 
-                                focus:ring-2 focus:ring-accent-yellow/20 focus:outline-none`}
+                                focus:ring-2 focus:ring-primary-dark/20 focus:outline-none`}
                             >
                                 Enviar Proposta
 

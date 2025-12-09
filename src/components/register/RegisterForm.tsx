@@ -180,7 +180,7 @@ export default function RegisterForm() {
                             id="terms"
                             checked={acceptedTerms}
                             onChange={(e) => setAcceptedTerms(e.target.checked)}
-                            className="h-4 w-4 rounded border-neutral-medium accent-accent-yellow cursor-pointer flex-shrink-0"
+                            className="h-4 w-4 rounded border-neutral-medium accent-primary-dark cursor-pointer flex-shrink-0"
                         />
                         <label htmlFor="terms" className="text-sm text-neutral-dark cursor-pointer leading-tight">
                             Eu li e aceito os{" "}

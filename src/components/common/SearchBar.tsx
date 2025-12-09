@@ -38,7 +38,7 @@ export default function SearchBar({
                     <button
                         type="submit"
                         aria-label="Buscar"
-                        className="flex items-center justify-center w-10 h-10 bg-primary-dark text-white rounded-full hover:bg-primary-dark/90 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-yellow focus:ring-offset-2"
+                        className="flex items-center justify-center w-10 h-10 bg-primary-dark text-white rounded-full hover:bg-primary-dark/90 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-dark focus:ring-offset-2"
                     >
                         <svg
                             className="w-5 h-5"

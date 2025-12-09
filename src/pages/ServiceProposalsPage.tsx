@@ -151,15 +151,15 @@ export default function ServiceProposalsPage() {
                     <div className="flex flex-row justify-between">
                         <h1 className="text-neutral-dark text-4xl font-black mb-1">{service?.title}</h1>
                         <div className="flex items-center mb-1">
-                            <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase ${getStatusColor(service.status)}`}>
-                                {getStatusLabel(service.status)}
+                            <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase ${getStatusColor(service?.status)}`}>
+                                {getStatusLabel(service?.status)}
                             </span>
                         </div>
                     </div>
-                    <div className="flex flex-col my-2">
+                    <div className="flex flex-col my-4 gap-1">
                         <p className="font-black text-xs">DESCRIÇÃO</p>
-                        <p className="text-neutral-medium font-light text-base">{service?.description}</p>
-                        <span className="text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        <p className="text-neutral-medium font-light text-base mb-4">{service?.description}</p>
+                        <span className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-4">
                                 {PROFESSION_LABELS[service?.category] || service?.category}
                             </span>
                         <div className="flex flex-row justify-between">

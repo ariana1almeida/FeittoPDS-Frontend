@@ -18,16 +18,16 @@ export default function ConfirmAcceptProposal({ isOpen, onConfirm, onCancel, tit
 
                     <div className="flex gap-3">
                         <button
-                            onClick={onConfirm}
-                            className="flex-1 bg-accent-yellow text-primary-dark py-2.5 px-4 rounded-lg hover:bg-accent-yellow-hover transition-colors duration-200 text-sm font-bold"
-                        >
-                            Confirmar
-                        </button>
-                        <button
                             onClick={onCancel}
                             className="flex-1 bg-white border border-gray-200 text-neutral-dark py-2.5 px-4 rounded-lg hover:bg-gray-50 transition-colors duration-200 text-sm"
                         >
                             Cancelar
+                        </button>
+                        <button
+                            onClick={onConfirm}
+                            className="flex-1 bg-primary-dark text-white py-2.5 px-4 rounded-lg hover:bg-primary-medium transition-colors duration-200 text-sm font-bold"
+                        >
+                            Confirmar
                         </button>
                     </div>
                 </div>

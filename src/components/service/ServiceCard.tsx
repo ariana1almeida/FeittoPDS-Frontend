@@ -60,7 +60,7 @@ const ServiceCard = ({
             </div>
 
             <div className="p-4 flex flex-col flex-grow">
-                <div className="flex items-center mb-3">
+                <div className="flex justify-between items-center mb-3">
                 <span className="text-xs font-semibold text-gray-600 uppercase tracking-wider">
                     {PROFESSION_LABELS[service.category] || service.category}
                 </span>

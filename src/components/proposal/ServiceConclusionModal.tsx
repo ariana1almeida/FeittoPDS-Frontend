@@ -3,6 +3,7 @@ import type {ProposalEntity} from "../../types/ProposalEntity";
 import {StarIcon, XIcon} from "@phosphor-icons/react";
 import {UserService} from "../../services/UserService.ts";
 import type {ProfileResponse} from "../../types/ProfileResponse.ts";
+import {Avatar} from "../common/Avatar.tsx";
 
 interface ServiceConclusionModalProps {
     isOpen: boolean;
@@ -47,8 +48,7 @@ export const ServiceConclusionModal = ({isOpen, onClose, proposal, onSubmit, sub
 
     const subjectLabel = userBeingEvaluated?.userType === 'CLIENT' ? 'cliente' : 'prestador';
     const subjectName = `${userBeingEvaluated?.firstName ?? ''} ${userBeingEvaluated?.lastName ?? ''}`.trim();
-    const subjectInitials = subjectName ? subjectName.split(' ').map(n => n[0]).join('').substring(0, 2) : '';
-
+    subjectName ? subjectName.split(' ').map(n => n[0]).join('').substring(0, 2) : '';
     const handleSubmit = async () => {
         if (rating <= 0) {
             setError('Por favor, selecione uma avaliação de 1 a 5 estrelas.');
@@ -83,30 +83,29 @@ export const ServiceConclusionModal = ({isOpen, onClose, proposal, onSubmit, sub
                         <XIcon size={20}/>
                     </button>
 
-                    <h2 className="text-xl font-bold text-primary-dark">{`Avaliar ${subjectLabel}`}</h2>
+                    <h2 className="text-xl font-bold text-neutral-dark">{`Avaliar ${subjectLabel}`}</h2>
                     <p className="text-sm text-neutral-dark mb-6">
                         {`Como foi sua experiência com ${subjectName}?`}
                     </p>
 
                     <div className="flex items-center space-x-4 mb-6">
-                        <div
-                            className="w-14 h-14 rounded-full bg-primary-dark flex items-center justify-center text-white font-bold text-xl">
-                            {subjectInitials}
-                        </div>
+                        <Avatar
+                            image={proposal?.provider?.picture || ''}
+                            alt={proposal?.provider?.firstName}
+                            size="md"
+                            fallbackText={proposal?.provider?.name}
+                            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex-shrink-0"
+                        />
                         <div>
-                            <h3 className="font-semibold text-primary-dark">{subjectName}</h3>
-                            {(userBeingEvaluated?.userType === 'PROVIDER' && proposal?.provider?.providerData?.professions) && (
-                                <p className="text-sm text-neutral-dark">{proposal.provider.providerData.professions}</p>
-                            )}
+                            <h3 className="font-semibold text-neutral-dark">{subjectName}</h3>
+                            {(userBeingEvaluated?.userType === 'PROVIDER')}
                             <div className="flex items-center text-sm text-neutral-dark mt-1">
-                                <StarIcon weight="fill" className="text-accent-yellow mr-1"/>
+                                <StarIcon weight="fill" className="text-yellow-400 mr-1"/>
                                 <span className="font-bold">{userBeingEvaluated?.averageRating}</span>
                                 <span className="ml-1">({userBeingEvaluated?.numberOfRatings} avaliações)</span>
                             </div>
                         </div>
                     </div>
-
-                    <hr className="border-gray-200 my-4"/>
 
                     <div className="mb-4">
                         <div
@@ -132,7 +131,7 @@ export const ServiceConclusionModal = ({isOpen, onClose, proposal, onSubmit, sub
                                         onClick={() => setRating(i)}
                                         className="focus:outline-none"
                                     >
-                                        <StarIcon size={28} weight={filled ? 'fill' : 'regular'} className={filled ? 'text-accent-yellow' : 'text-gray-300 hover:text-yellow-300 transition-colors'} />
+                                        <StarIcon size={28} weight={filled ? 'fill' : 'regular'} className={filled ? 'text-yellow-400' : 'text-gray-300 hover:text-yellow-400 transition-colors'} />
                                     </button>
                                 );
                             })}
@@ -146,32 +145,31 @@ export const ServiceConclusionModal = ({isOpen, onClose, proposal, onSubmit, sub
                             value={comment}
                             onChange={(e) => setComment(e.target.value)}
                             rows={4}
-                            className="w-full border border-gray-200 rounded-lg p-2 text-sm focus:ring-2 focus:ring-primary-dark"
+                            className="w-full border border-gray-200 rounded-lg p-2 text-sm"
                             placeholder="Deixe um comentário sobre como foi sua experiência..."
                         />
                     </div>
 
                     <div className="mb-4">
-                        <p className="bg-blue-100 text-sm text-primary-dark p-3 rounded-lg">
-                            Sua avaliação ajuda outros clientes a escolherem os melhores
-                            prestadores e contribui para a qualidade da plataforma FEITTO.
+                        <p className="bg-primary-dark/10 text-sm font-semibold text-primary-dark p-3 rounded-lg">
+                            Sua avaliação ajuda outros clientes e prestadores e contribui para a qualidade da plataforma FEITTO.
                         </p>
                     </div>
 
                     <div className="flex gap-3">
-                        <button
-                            onClick={handleSubmit}
-                            disabled={submitting}
-                            className="flex-1 bg-accent-yellow text-primary-dark py-2.5 px-4 rounded-lg hover:bg-yellow-500 transition-colors duration-200 text-sm font-bold"
-                        >
-                            {submitting ? 'Enviando...' : (subjectLabel === 'cliente' ? 'Enviar Avaliação do Cliente' : 'Enviar Avaliação')}
-                        </button>
                         <button
                             onClick={onClose}
                             disabled={submitting}
                             className="flex-1 bg-white border border-gray-200 text-gray-700 py-2.5 px-4 rounded-lg hover:bg-gray-50 transition-colors duration-200 text-sm"
                         >
                             Cancelar
+                        </button>
+                        <button
+                            onClick={handleSubmit}
+                            disabled={submitting}
+                            className="flex-1 bg-primary-dark text-white py-2.5 px-4 rounded-lg hover:bg-primary-medium transition-colors duration-200 text-sm font-bold"
+                        >
+                            {submitting ? 'Enviando...' : (subjectLabel === 'cliente' ? 'Enviar Avaliação do Cliente' : 'Enviar Avaliação')}
                         </button>
                     </div>
                 </div>

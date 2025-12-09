@@ -70,6 +70,18 @@ export default function ProviderHomePage() {
         loadServices();
     }, [loadServices]);
 
+    const sortedServices = [...services].sort((a, b) => {
+        const aIsUnavailableOrCompleted = a.status === 'COMPLETED' || a.status === 'CANCELLED';
+        const bIsUnavailableOrCompleted = b.status === 'COMPLETED' || b.status === 'CANCELLED';
+
+        if (aIsUnavailableOrCompleted === bIsUnavailableOrCompleted) {
+            return 0;
+        }
+
+        return aIsUnavailableOrCompleted ? 1 : -1;
+    });
+
+
     return (
         <div className="min-h-screen w-full bg-neutral-light flex flex-col">
             <div className="flex-1 px-4 py-6">
@@ -77,9 +89,9 @@ export default function ProviderHomePage() {
                 <div className="w-full max-w-2xl mx-auto mt-4">
                     <button
                         onClick={handleViewProposals}
-                        className="w-full bg-accent-yellow text-primary-dark font-semibold px-6 py-3 rounded-lg hover:bg-accent-yellow-hover transition-colors duration-200 shadow-md flex items-center justify-center gap-2"
+                        className="w-full bg-primary-dark text-white font-semibold px-6 py-3 rounded-lg hover:bg-primary-medium transition-colors duration-200 shadow-md flex items-center justify-center gap-2"
                     >
-                        <ListBulletsIcon size={20} className="text-primary-dark"/>
+                        <ListBulletsIcon size={20} className="text-white"/>
                         <span>Ver Minhas Propostas</span>
                     </button>
                 </div>
@@ -93,10 +105,10 @@ export default function ProviderHomePage() {
                         </div>
                     ) : services.length > 0 ? (
                         <div className="space-y-4">
-                            <h3 className="text-lg font-semibold text-primary-dark mb-4">
+                            <h3 className="text-lg font-semibold text-neutral-dark mb-4">
                                 Serviços Disponíveis ({services.length})
                             </h3>
-                            {services.map((service) => (
+                            {sortedServices.map((service) => (
                                 <ProviderServiceCard
                                     key={service.id}
                                     service={service}

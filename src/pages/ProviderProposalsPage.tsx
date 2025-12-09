@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useState} from "react";
+﻿import {useCallback, useEffect, useState} from "react";
 import {ProposalService} from "../services/ProposalService.ts";
 import type {ProposalEntity} from "../types/ProposalEntity.ts";
 import BackButton from "../components/common/BackButton.tsx";
@@ -45,13 +45,12 @@ export default function ProviderProposalsPage() {
         loadProposals();
     }, [loadProposals]);
 
-    const handleUpdateProposal = (proposalId: string | undefined) => {
-        if (!proposalId) {
-            return;
-        }
-        // TODO: Implementar lógica de atualização
-        console.log("Atualizar proposta:", proposalId);
-    };
+    // const handleUpdateProposal = (proposalId: string | undefined) => {
+    //     if (!proposalId) {
+    //         return;
+    //     }
+    //     console.log("Atualizar proposta:", proposalId);
+    // };
 
     const handleDeleteProposal = async (proposalId: string | undefined) => {
         if (!proposalId) {
@@ -64,7 +63,6 @@ export default function ProviderProposalsPage() {
     };
 
     const openRatingModal = (proposal: ProposalEntity) => {
-        // fetch the full service to obtain client data, then open modal with provider set to client
         (async () => {
             try {
                 const serviceService = ServiceService.getInstance();
@@ -89,7 +87,6 @@ export default function ProviderProposalsPage() {
                 setRatingModalOpen(true);
             } catch (err) {
                 console.error('Erro ao buscar service para abrir modal de avaliação', err);
-                // fallback: open with original proposal if fetch fails
                 setSelectedProposal(proposal);
                 setSelectedClientId(undefined);
                 setRatingModalOpen(true);
@@ -131,7 +128,7 @@ export default function ProviderProposalsPage() {
                         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-dark mx-auto"></div>
                         <p className="mt-2 text-neutral-medium">Carregando propostas...</p>
                     </div>) : proposals.length > 0 ? (<div className="space-y-6">
-                        <h3 className="text-xl font-medium text-primary-dark mb-4">
+                        <h3 className="text-lg font-medium text-neutral-dark mb-4">
                             Minhas propostas ({proposals.length})
                         </h3>
                         {proposals.map((proposal) => {
@@ -140,13 +137,13 @@ export default function ProviderProposalsPage() {
                             const hideActions = svcStatus === 'IN_PROGRESS' || svcStatus === 'COMPLETED';
 
                             return (<div key={proposal.id}
-                                         className="bg-white p-6 rounded-lg shadow-md border border-gray-200 space-y-2">
+                                         className="bg-white p-6 rounded-lg my-6 space-y-2">
                                     <div className="flex items-start">
                                         <img src={proposal.service?.picture} alt={proposal.service?.title}
                                              className="w-60 h-60 rounded-lg object-cover"/>
                                         <div className="flex-1 m-2">
                                             <div className="flex items-center justify-between">
-                                                <h3 className="text-lg font-bold text-primary-dark m-2">{proposal.service?.title}</h3>
+                                                <h3 className="text-lg font-bold text-neutral-dark m-2">{proposal.service?.title}</h3>
                                                 {statusLabel && (
                                                     <span className={`text-xs font-medium px-2 py-0.5 rounded-full mr-2 ${svcStatus ? STATUS_CLASSES[svcStatus] ?? 'bg-gray-100 text-gray-700' : 'bg-gray-100 text-gray-700'}`}>
                                                         {statusLabel}
@@ -157,12 +154,12 @@ export default function ProviderProposalsPage() {
 
                                             <div className="flex flex-row flex-grow justify-between my-4">
                                                 <div className="flex items-center space-x-3 p-3">
-                                                    <div className="bg-yellow-100 p-2 rounded-full">
-                                                        <MoneyIcon size={24} className="text-accent-yellow"/>
+                                                    <div className="bg-primary-dark/10 p-2 rounded-full">
+                                                        <MoneyIcon size={24} className="text-primary-dark"/>
                                                     </div>
                                                     <div>
                                                         <p className="text-xs text-gray-500">Valor</p>
-                                                        <p className="font-semibold text-primary-dark">R$ {proposal.estimatedPrice.toFixed(2).replace('.', ',')}</p>
+                                                        <p className="font-bold text-neutral-dark">R$ {proposal.estimatedPrice.toFixed(2).replace('.', ',')}</p>
                                                     </div>
                                                 </div>
 
@@ -172,7 +169,7 @@ export default function ProviderProposalsPage() {
                                                     </div>
                                                     <div>
                                                         <p className="text-xs text-gray-500">Prazo</p>
-                                                        <p className="font-semibold text-primary-dark">{proposal.estimatedDays} dia(s)</p>
+                                                        <p className="font-bold text-neutral-dark">{proposal.estimatedDays} dia(s)</p>
                                                     </div>
                                                 </div>
 
@@ -194,11 +191,6 @@ export default function ProviderProposalsPage() {
                                     <div className="flex justify-end space-x-3">
                                         {!hideActions && (<>
                                                 <button
-                                                    onClick={() => handleUpdateProposal(proposal.id)}
-                                                    className="px-4 py-2 text-sm font-medium text-white bg-primary-dark rounded-md hover:bg-primary-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
-                                                    Atualizar Proposta
-                                                </button>
-                                                <button
                                                     onClick={async () => handleDeleteProposal(proposal.id)}
                                                     className="px-4 py-2 text-sm font-medium text-neutral-dark bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">
                                                     Excluir Proposta
@@ -207,7 +199,7 @@ export default function ProviderProposalsPage() {
 
                                         {svcStatus === 'COMPLETED' && (<button
                                                 onClick={() => openRatingModal(proposal)}
-                                                className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-primary-dark hover:bg-accent-yellow-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-200">
+                                                className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-primary-dark hover:bg-primary-dark-hover focus:outline-none">
                                                 Avaliar Cliente
                                             </button>)}
                                     </div>
