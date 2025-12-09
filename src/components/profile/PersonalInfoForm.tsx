@@ -76,7 +76,6 @@ export default function PersonalInfoForm({updateData, setUpdateData, onSubmit, i
                 </div>
             </div>
 
-            {isProvider && (
                 <div className="mb-12">
                     <label className="block text-sm font-medium text-neutral-dark mb-1">Bairro</label>
                     <Input
@@ -90,7 +89,6 @@ export default function PersonalInfoForm({updateData, setUpdateData, onSubmit, i
                         }}
                     />
                 </div>
-            )}
 
             {!isProvider && (
                 <>

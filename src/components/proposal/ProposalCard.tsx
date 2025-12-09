@@ -26,8 +26,6 @@ export default function ProposalCard({proposal, service, onAccept, onCancel, onC
     const ratingService = RatingService.getInstance();
     const [serviceRating, setServiceRating] = useState<RatingResponse | null>(null);
 
-    // Load the rating only when the service has been completed.
-    // Use a mounted flag to avoid setting state after unmount.
     useEffect(() => {
         let mounted = true;
 
@@ -54,7 +52,6 @@ export default function ProposalCard({proposal, service, onAccept, onCancel, onC
         return () => { mounted = false; };
     }, [service?.status, service?.client?.id, proposal?.providerId, auth.authData?.userType, ratingService]);
 
-    // derive numeric score and number of stars to render
     const ratingScore = serviceRating ? (typeof serviceRating.score === 'number' ? serviceRating.score : Number(serviceRating.score) || 0) : 0;
     const starsCount = Math.min(5, Math.max(0, Math.round(ratingScore)));
 

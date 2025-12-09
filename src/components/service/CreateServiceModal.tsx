@@ -181,7 +181,7 @@ const CreateServiceModal = ({
                                     className="hidden"
                                 />
                                 {imagePreview && (<div
-                                        className="absolute bottom-2 right-2 bg-accent-green rounded-full p-2 shadow-lg">
+                                        className="absolute bottom-2 right-2 bg-primary-dark rounded-full p-2 shadow-lg">
                                         <CameraIcon className="h-4 w-4 sm:h-5 sm:w-5 text-white"/>
                                     </div>)}
                             </div>
