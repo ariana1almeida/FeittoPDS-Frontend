@@ -24,7 +24,7 @@ export default function LoginForm() {
         const ok = await login(email, password);
         setLoading(false);
         if (!ok) {
-            setError("Email ou senha inválidos");
+            setError("E-mail ou senha inválidos");
             return;
         }
     };

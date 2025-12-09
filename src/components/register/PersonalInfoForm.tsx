@@ -40,7 +40,7 @@ export default function PersonalInfoForm({
                     name="phone"
                     value={formData.phone}
                     onChange={onChange}
-                    placeholder="Telefone"
+                    placeholder="DDD + Telefone"
                     label="Telefone"
                     required
                     error={showValidation && !formData.phone.trim()}

@@ -29,6 +29,7 @@ export default function Header() {
     }, [authData?.token]);
 
 
+
     const firstName = userData?.firstName?.split(' ')[0] || authData?.userType;
     const userInitial = firstName?.charAt(0).toUpperCase() || 'U';
 

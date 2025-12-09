@@ -28,7 +28,7 @@ export function HomePage() {
                             <div className="flex py-8 justify-start gap-4 max-w-sm">
                                 <button
                                     onClick={() => navigateTo('/register')}
-                                    className="text-white bg-primary-dark font-bold px-6 py-4 rounded-2xl hover:bg-primary-medium transition-colors flex flex-row items-center justify-center gap-2 min-w-30 flex-1"
+                                    className="text-white bg-primary-dark font-bold px-4 py-4 rounded-2xl hover:bg-primary-medium transition-colors flex flex-row items-center justify-center gap-2 min-w-30 flex-1"
                                 >
                                     Comece agora <ArrowRightIcon size={16}/>
                                 </button>
@@ -54,11 +54,11 @@ export function HomePage() {
                     <p className="text-neutral-medium max-w-2xl mx-auto text-lg font-normal">
                         Profissionais especializados para qualquer necessidade
                     </p>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 mt-8 px-4">
-                        <div className="bg-neutral-light w-42 h-42 p-4 rounded-xl border-2 border-neutral-medium/5">
+                    <div className="flex flex-wrap justify-center gap-6 mt-8 px-4">
+                    <div className="bg-neutral-light w-42 h-42 p-4 rounded-xl border-2 border-neutral-medium/5">
                             <div className="text-center p-6 flex flex-col items-center justify-center h-full">
                                 <div
-                                    className="w-16 h-16 text-4xl bg-accent-yellow rounded-full mb-3 flex items-center justify-center">
+                                    className="w-16 h-16 text-4xl rounded-full mb-3 flex items-center justify-center">
                                     🎨
                                 </div>
                                 <h3 className="text-lg font-semibold text-neutral-dark">Pintura</h3>
@@ -67,7 +67,7 @@ export function HomePage() {
                         <div className="bg-neutral-light w-42 h-42 p-4 rounded-xl border-2 border-neutral-medium/5">
                             <div className="text-center p-6 flex flex-col items-center justify-center h-full">
                                 <div
-                                    className="w-16 h-16 text-4xl bg-accent-yellow rounded-full mb-3 flex items-center justify-center">
+                                    className="w-16 h-16 text-4xl rounded-full mb-3 flex items-center justify-center">
                                     ⚡
                                 </div>
                                 <h3 className="text-lg font-semibold text-neutral-dark">Elétrica</h3>
@@ -76,7 +76,7 @@ export function HomePage() {
                         <div className="bg-neutral-light w-42 h-42 p-4 rounded-xl border-2 border-neutral-medium/5">
                             <div className="text-center p-6 flex flex-col items-center justify-center h-full">
                                 <div
-                                    className="w-16 h-16 text-4xl bg-accent-yellow rounded-full mb-3 flex items-center justify-center">
+                                    className="w-16 h-16 text-4xl rounded-full mb-3 flex items-center justify-center">
                                     🔧
                                 </div>
                                 <h3 className="text-lg font-semibold text-neutral-dark">Hidráulica</h3>
@@ -85,7 +85,7 @@ export function HomePage() {
                         <div className="bg-neutral-light w-42 h-42 p-4 rounded-xl border-2 border-neutral-medium/5">
                             <div className="text-center p-6 flex flex-col items-center justify-center h-full">
                                 <div
-                                    className="w-16 h-16 text-4xl bg-accent-yellow rounded-full mb-3 flex items-center justify-center">
+                                    className="w-16 h-16 text-4xl rounded-full mb-3 flex items-center justify-center">
                                     ✨
                                 </div>
                                 <h3 className="text-lg font-semibold text-neutral-dark">Limpeza</h3>
@@ -94,7 +94,7 @@ export function HomePage() {
                         <div className="bg-neutral-light w-42 h-42 p-4 rounded-xl border-2 border-neutral-medium/5">
                             <div className="text-center p-6 flex flex-col items-center justify-center h-full">
                                 <div
-                                    className="w-16 h-16 text-4xl bg-accent-yellow rounded-full mb-3 flex items-center justify-center">
+                                    className="w-16 h-16 text-4xl rounded-full mb-3 flex items-center justify-center">
                                     🪓
                                 </div>
                                 <h3 className="text-lg font-semibold text-neutral-dark">Marcenaria</h3>
@@ -103,7 +103,7 @@ export function HomePage() {
                         <div className="bg-neutral-light w-42 h-42 p-4 rounded-xl border-2 border-neutral-medium/5">
                             <div className="text-center p-6 flex flex-col items-center justify-center h-full">
                                 <div
-                                    className="w-16 h-16 text-4xl bg-accent-yellow rounded-full mb-3 flex items-center justify-center">
+                                    className="w-16 h-16 text-4xlrounded-full mb-3 flex items-center justify-center">
                                     🌿
                                 </div>
                                 <h3 className="text-lg font-semibold text-neutral-dark">Jardinagem</h3>
@@ -121,7 +121,7 @@ export function HomePage() {
                         </p>
                         <div className="flex flex-wrap justify-center gap-6 my-6 pb-8">
                             <div
-                                className="bg-white rounded-xl p-4 sm:p-6 border-2 border-neutral-medium/10 aspect-square flex flex-col justify-between w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)]">
+                                className="bg-white rounded-xl p-4 sm:p-6 border-2 border-neutral-medium/10 lg:aspect-square flex flex-col justify-between w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)]">
                                 <div>
                                     <div
                                         className="bg-primary-dark text-white font-black text-xl h-12 w-12 sm:h-14 sm:w-14 rounded-xl flex items-center justify-center mb-2">
@@ -136,7 +136,7 @@ export function HomePage() {
                             </div>
 
                             <div
-                                className="bg-white rounded-xl p-4 sm:p-6 border-2 border-neutral-medium/10 aspect-square flex flex-col justify-between w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)]">
+                                className="bg-white rounded-xl p-4 sm:p-6 border-2 border-neutral-medium/10 lg:aspect-square flex flex-col justify-between w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)]">
                                 <div>
                                     <div
                                         className="bg-primary-dark text-white font-black text-xl h-12 w-12 sm:h-14 sm:w-14 rounded-xl flex items-center justify-center mb-2">
@@ -151,7 +151,7 @@ export function HomePage() {
                             </div>
 
                             <div
-                                className="bg-white rounded-xl p-4 sm:p-6 border-2 border-neutral-medium/10 aspect-square flex flex-col justify-between w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)]">
+                                className="bg-white rounded-xl p-4 sm:p-6 border-2 border-neutral-medium/10 lg:aspect-square flex flex-col justify-between w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)]">
                                 <div>
                                     <div
                                         className="bg-primary-dark text-white font-black text-xl h-12 w-12 sm:h-14 sm:w-14 rounded-xl flex items-center justify-center mb-2">
@@ -166,7 +166,7 @@ export function HomePage() {
                             </div>
 
                             <div
-                                className="bg-white rounded-xl p-4 sm:p-6 border-2 border-neutral-medium/10 aspect-square flex flex-col justify-between w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)]">
+                                className="bg-white rounded-xl p-4 sm:p-6 border-2 border-neutral-medium/10 lg:aspect-square flex flex-col justify-between w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)]">
                                 <div>
                                     <div
                                         className="bg-primary-dark text-white font-black text-xl h-12 w-12 sm:h-14 sm:w-14 rounded-xl flex items-center justify-center mb-2">
@@ -243,7 +243,7 @@ export function HomePage() {
                     <h1 className="text-4xl text-white font-black mb-4">
                         Pronto para começar?
                     </h1>
-                    <p className="text-white text-lg font-extralight mb-6">
+                    <p className="text-white text-lg font-extralight mb-6 mx-2">
                         Cadastre-se agora e resolva seu problema em minutos
                     </p>
                     <div className="flex justify-center">

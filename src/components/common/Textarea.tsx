@@ -23,7 +23,7 @@ const Textarea = ({
 }: TextareaProps) => {
   return (
     <div>
-      <label className="block text-sm font-medium text-primary-dark mb-1">
+      <label className="block text-sm font-medium text-neutral-dark mb-1">
         {label} {required && <span className="text-status-error">*</span>}
       </label>
       <textarea

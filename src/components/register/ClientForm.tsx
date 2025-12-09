@@ -63,7 +63,7 @@ export default function ClientForm({
                     <Input
                         name="clientData.houseNumber"
                         type="number"
-                        label="Nº da Casa"
+                        label="Nº"
                         placeholder="000"
                         value={formData.clientData.houseNumber}
                         onChange={onChange}
@@ -76,7 +76,7 @@ export default function ClientForm({
             <Input
                 name="clientData.reference"
                 label="Referência"
-                placeholder="Referência"
+                placeholder="Apto, Casa, Ponto de referência..."
                 value={formData.clientData.reference}
                 onChange={onChange}
             />

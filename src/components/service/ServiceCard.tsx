@@ -1,5 +1,5 @@
 // src/components/service/ServiceCard.tsx
-import { PROFESSION_LABELS, getProfessionBadgeClass } from "../../constants/formData";
+import { PROFESSION_LABELS } from "../../constants/formData";
 import { CalendarBlankIcon, TrashIcon } from "@phosphor-icons/react";
 import type { ServiceEntity } from "../../types/ServiceEntity";
 
@@ -15,100 +15,87 @@ const ServiceCard = ({
                          onDelete,
                          onViewProposals
                      }: ServiceCardProps) => {
-    const formatDate = (dateString: string) => {
-        return new Date(dateString).toLocaleDateString('pt-BR');
-    };
-
     const getStatusColor = (status: string) => {
         switch (status) {
             case 'OPEN':
-                return 'bg-gray-100 text-gray-700';
+                return 'bg-lime-200 text-neutral-dark';
             case 'IN_PROGRESS':
-                return 'bg-blue-100 text-blue-800';
+                return 'bg-yellow-200 text-neutral-dark';
             case 'COMPLETED':
-                return 'bg-green-100 text-green-800';
+                return 'bg-emerald-200 text-neutral-dark';
             case 'CANCELLED':
-                return 'bg-red-100 text-red-800';
+                return 'bg-red-200 text-neutral-dark';
             default:
-                return 'bg-gray-100 text-gray-700';
+                return 'bg-gray-200 text-neutral-dark';
         }
     };
 
     const getStatusLabel = (status: string) => {
         switch (status) {
             case 'OPEN':
-                return 'Aberto';
+                return 'ABERTO';
             case 'IN_PROGRESS':
-                return 'Em andamento';
+                return 'EM ANDAMENTO';
             case 'COMPLETED':
-                return 'Concluído';
+                return 'CONCLUÍDO';
             case 'CANCELLED':
-                return 'Cancelado';
+                return 'CANCELADO';
             default:
                 return status;
         }
     };
 
-    const professionBadgeClass = getProfessionBadgeClass(service.category);
-
     return (
-        <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 hover:shadow-lg transition-shadow duration-200">
-            <div className="flex gap-4">
-                <div className="flex-shrink-0">
-                    <img
-                        src={service.picture}
-                        alt={service.title}
-                        className="w-48 h-48 object-cover rounded-lg"
-                        onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.src = "https://via.placeholder.com/64x64?text=Foto";
-                        }}
-                    />
+        <div className="bg-white rounded-xl overflow-hidden hover:shadow-md transition-shadow duration-200 max-w-[296px] min-h-[4.5rem] w-full flex flex-col">
+            <div className="relative">
+                <img
+                    src={service.picture}
+                    alt={service.title}
+                    className="w-full h-48 object-cover"
+                    onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = "https://via.placeholder.com/256x192?text=Foto";
+                    }}
+                />
+            </div>
+
+            <div className="p-4 flex flex-col flex-grow">
+                <div className="flex justify-between items-center mb-3">
+                <span className="text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    {PROFESSION_LABELS[service.category] || service.category}
+                </span>
+                    <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase ${getStatusColor(service.status)}`}>
+                    {getStatusLabel(service.status)}
+                </span>
                 </div>
-                <div className="flex-1 min-w-0 flex flex-col justify-between">
-                    <div>
-                        <div className="flex justify-between items-start mb-2">
-                            <h3 className="text-lg font-medium text-primary-dark truncate">
-                                {service.title}
-                            </h3>
-                            <div className="flex flex-col items-end gap-1">
-                                <span className={`px-2 py-0.5 rounded-full text-xs font-medium whitespace-nowrap ${getStatusColor(service.status)}`}>
-                                    {getStatusLabel(service.status)}
-                                </span>
-                                <span className={`${professionBadgeClass} px-2 py-0.5 rounded-full text-xs font-medium whitespace-nowrap`}>
-                                    {PROFESSION_LABELS[service.category] || service.category}
-                                </span>
-                            </div>
-                        </div>
-                        <p className="text-sm text-neutral-medium mb-2 line-clamp-2">
-                            {service.description}
-                        </p>
-                    </div>
-                    <div>
-                        <div className="flex items-center text-sm text-primary-dark mb-2">
-                            <span className="flex justify-center items-center gap-1 ml-4">
-                                <CalendarBlankIcon size={18} /> {formatDate(service.createdAt)}
-                            </span>
-                        </div>
-                        <div className="flex gap-2 pt-3 border-t border-neutral-light">
-                            <button
-                                onClick={() => onViewProposals(service.id)}
-                                className="flex-1 bg-primary-dark text-white py-2 px-3 rounded-lg hover:bg-primary-medium transition-colors duration-200 text-sm font-medium"
-                            >
-                                Ver Propostas
-                            </button>
-                            <button
-                                onClick={() => onDelete(service.id)}
-                                className="border border-red-500 text-red-500 py-2 px-3 rounded-lg hover:bg-red-200 transition-colors duration-200 text-sm font-medium"
-                            >
-                                <TrashIcon size={18} weight="light"/>
-                            </button>
-                        </div>
-                    </div>
+
+                <h3 className="text-base font-semibold text-neutral-dark line-clamp-1">
+                    {service.title}
+                </h3>
+
+                <p className="text-sm text-neutral-medium mb-4 line-clamp-3 flex-grow">
+                    {service.description}
+                </p>
+
+                <div className="flex items-center justify-between pt-3 border-t border-gray-200 mt-auto">
+                    <button
+                        onClick={() => onViewProposals(service.id)}
+                        className="text-sm text-primary-dark font-medium hover:text-primary-medium transition-colors duration-200 flex items-center gap-1"
+                    >
+                        <CalendarBlankIcon size={16} weight="bold" />
+                        Ver Propostas
+                    </button>
+                    <button
+                        onClick={() => onDelete(service.id)}
+                        className="text-red-500 hover:text-red-700 transition-colors duration-200"
+                    >
+                        <TrashIcon size={18} weight="regular"/>
+                    </button>
                 </div>
             </div>
         </div>
     );
+
 };
 
 export default ServiceCard;
