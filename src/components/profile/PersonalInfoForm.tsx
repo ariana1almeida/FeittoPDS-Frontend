@@ -17,8 +17,8 @@ export default function PersonalInfoForm({updateData, setUpdateData, onSubmit, i
         <form className="w-full space-y-6">
             <div className="grid grid-cols-2 gap-4">
                 <div>
-                    <label className="block text-sm text-primary-dark font-medium mb-1">
-                        Primeiro nome *
+                    <label className="block text-sm text-neutral-dark font-medium mb-1">
+                        Primeiro nome
                     </label>
                     <Input
                         name=""
@@ -29,8 +29,8 @@ export default function PersonalInfoForm({updateData, setUpdateData, onSubmit, i
                     />
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-primary-dark mb-1">
-                        Sobrenome *
+                    <label className="block text-sm font-medium text-neutral-dark mb-1">
+                        Sobrenome
                     </label>
                     <Input
                         name=""
@@ -42,8 +42,8 @@ export default function PersonalInfoForm({updateData, setUpdateData, onSubmit, i
                 </div>
             </div>
 
-            <div>
-                <label className="block text-sm font-medium text-primary-dark mb-1">Telefone</label>
+            <div className="mb-12">
+                <label className="block text-sm font-medium text-neutral-dark mb-1">Telefone</label>
                 <Input
                     name=""
                     icon={<PhoneIcon/>}
@@ -56,7 +56,7 @@ export default function PersonalInfoForm({updateData, setUpdateData, onSubmit, i
 
             <div className="grid grid-cols-2 gap-4">
                 <div>
-                    <label className="block text-sm font-medium text-primary-dark mb-1">Estado</label>
+                    <label className="block text-sm font-medium text-neutral-dark mb-1">Estado</label>
                     <Input name="" value={updateData?.state ?? ""} readOnly={true}/>
                 </div>
                 <div>
@@ -77,8 +77,8 @@ export default function PersonalInfoForm({updateData, setUpdateData, onSubmit, i
             </div>
 
             {isProvider && (
-                <div>
-                    <label className="block text-sm font-medium text-primary-dark mb-1">Bairro</label>
+                <div className="mb-12">
+                    <label className="block text-sm font-medium text-neutral-dark mb-1">Bairro</label>
                     <Input
                         name=""
                         value={updateData?.neighborhood ?? ""}
@@ -95,7 +95,7 @@ export default function PersonalInfoForm({updateData, setUpdateData, onSubmit, i
             {!isProvider && (
                 <>
                     <div>
-                        <label className="block text-sm font-medium text-primary-dark mb-1">Endereço</label>
+                        <label className="block text-sm font-medium text-neutral-dark mb-1">Endereço</label>
                         <Input
                             name=""
                             value={updateData?.userData?.street ?? ""}
@@ -110,7 +110,7 @@ export default function PersonalInfoForm({updateData, setUpdateData, onSubmit, i
 
                     <div className="grid grid-cols-2 gap-4">
                         <div>
-                            <label className="block text-sm font-medium text-primary-dark mb-1">Número</label>
+                            <label className="block text-sm font-medium text-neutral-dark mb-1">Número</label>
                             <Input
                                 name=""
                                 value={updateData?.userData?.houseNumber?.toString() ?? ""}
@@ -123,7 +123,7 @@ export default function PersonalInfoForm({updateData, setUpdateData, onSubmit, i
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-primary-dark mb-1">Referência</label>
+                            <label className="block text-sm font-medium text-neutral-dark mb-1">Referência</label>
                             <Input
                                 name=""
                                 value={updateData?.userData?.reference ?? ""}

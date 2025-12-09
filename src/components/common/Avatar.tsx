@@ -30,11 +30,11 @@ export function Avatar({className, image, alt = "", fallbackText = "", size = 'm
                 <AvatarPrimitive.Image
                     src={image}
                     alt={alt}
-                    className="aspect-square size-full object-cover"
+                    className="aspect-square size-full object-cover rounded-full"
                 />
             )}
             <AvatarPrimitive.Fallback
-                className="bg-primary-dark text-white flex size-full items-center justify-center rounded-full font-semibold"
+                className="bg-accent-green text-white flex size-full items-center justify-center rounded-full font-semibold"
             >
                 {fallbackText?.charAt(0)?.toUpperCase() || '?'}
             </AvatarPrimitive.Fallback>

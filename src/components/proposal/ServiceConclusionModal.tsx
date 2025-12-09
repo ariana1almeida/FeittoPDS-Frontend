@@ -95,8 +95,8 @@ export const ServiceConclusionModal = ({isOpen, onClose, proposal, onSubmit, sub
                         </div>
                         <div>
                             <h3 className="font-semibold text-primary-dark">{subjectName}</h3>
-                            {(userBeingEvaluated?.userType === 'PROVIDER' && proposal?.provider?.providerData?.profession) && (
-                                <p className="text-sm text-neutral-dark">{proposal.provider.providerData.profession}</p>
+                            {(userBeingEvaluated?.userType === 'PROVIDER' && proposal?.provider?.providerData?.professions) && (
+                                <p className="text-sm text-neutral-dark">{proposal.provider.providerData.professions}</p>
                             )}
                             <div className="flex items-center text-sm text-neutral-dark mt-1">
                                 <StarIcon weight="fill" className="text-accent-yellow mr-1"/>

@@ -1,32 +1,43 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary-dark: #20124D;
-  --color-primary-medium: #3B2A72;
-  --color-accent-yellow: #FCC010;
-  --color-accent-yellow-hover: #FFD23F;
-  --color-neutral-dark: #333333;
-  --color-neutral-medium: #656565;
-  --color-neutral-light: #FAF9F6;
-  --color-status-success: #28A745;
-  --color-status-error: #E63946;
+    --color-primary-dark: #6D28D9;
+    --color-primary-medium: #491b94;
+    --color-accent-green: #D9F99D;
+    --color-accent-green-hover: #B3EB4B;
+    --color-neutral-dark: #1A1A1A;
+    --color-neutral-medium: #656565;
+    --color-neutral-light: #F5F5F7;
+    --color-status-success: #25D366;
+    --color-status-progress: #FEE685;
+    --color-status-finished: #A4F4CF;
+    --color-stars-yellow: #FFB900;
+    --color-status-error: #E7000B;
 }
 
 html, body {
-  overflow-x: hidden;
-  width: 100%;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 #root {
-  width: 100%;
-  min-height: 100vh;
+    width: 100%;
+    min-height: 100vh;
 }
+
 .tabs-trigger-active {
     background: var(--color-neutral-light);
-    color: var(--color-primary-dark);
+    color: var(--color-neutral-dark);
 }
 
 .tabs-trigger-inactive {
     background: white;
     color: var(--color-neutral-medium);
+}
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
 }

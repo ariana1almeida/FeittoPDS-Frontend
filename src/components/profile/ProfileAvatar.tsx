@@ -34,7 +34,7 @@ export default function ProfileAvatar(profileAvatarProps: ProfileAvatarProps) {
             </Avatar>
             <label
                 htmlFor="avatar-upload"
-                className="bg-accent-yellow rounded-full p-2 cursor-pointer shadow-lg hover:bg-accent-yellow-hover transition-colors absolute right-14 top-18"
+                className="bg-primary-dark rounded-full p-2 cursor-pointer absolute right-14 top-18"
             >
                 <CameraIcon className="h-5 w-5 text-white"/>
                 <input id="avatar-upload" type="file" accept="image/*" className="hidden" onChange={handleSubmit}/>

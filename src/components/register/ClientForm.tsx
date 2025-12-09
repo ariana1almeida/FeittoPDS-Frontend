@@ -6,38 +6,37 @@ import {CITIES, STATES} from "../../constants/formData";
 
 interface ClientFormProps {
     formData: FormData;
-    onChange: (
-        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-    ) => void;
+    onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
     showValidation: boolean;
 }
 
 export default function ClientForm({
-                                       formData,
-                                       onChange,
-                                       showValidation,
+                                       formData, onChange, showValidation,
                                    }: ClientFormProps) {
-    return (
-        <FormSection title="Dados do Endereço">
-            <div className="grid grid-cols-2 gap-4">
-                <CustomSelect
-                    label="Estado"
-                    name="state"
-                    value={formData.state}
-                    options={STATES}
-                    placeholder="Estado"
-                    onChange={onChange}
-                    error={showValidation && !formData.state}
-                />
-                <CustomSelect
-                    label="Cidade"
-                    name="city"
-                    value={formData.city}
-                    options={CITIES}
-                    placeholder="Cidade"
-                    onChange={onChange}
-                    error={showValidation && !formData.city}
-                />
+    return (<FormSection title="Endereço:">
+            <div className="flex gap-4 my-6">
+                <div className="flex-1">
+                    <CustomSelect
+                        label="Estado"
+                        name="state"
+                        value={formData.state}
+                        options={STATES}
+                        placeholder="Estado"
+                        onChange={onChange}
+                        error={showValidation && !formData.state}
+                    />
+                </div>
+                <div className="flex-1">
+                    <CustomSelect
+                        label="Cidade"
+                        name="city"
+                        value={formData.city}
+                        options={CITIES}
+                        placeholder="Cidade"
+                        onChange={onChange}
+                        error={showValidation && !formData.city}
+                    />
+                </div>
             </div>
             <Input
                 name="neighborhood"
@@ -48,8 +47,8 @@ export default function ClientForm({
                 required
                 error={showValidation && !formData.neighborhood.trim()}
             />
-            <div className="grid grid-cols-3 gap-4">
-                <div className="col-span-2">
+            <div className="flex gap-4 my-6">
+                <div className="flex-1">
                     <Input
                         name="clientData.street"
                         label="Rua"
@@ -60,11 +59,11 @@ export default function ClientForm({
                         error={showValidation && !formData.clientData.street.trim()}
                     />
                 </div>
-                <div className="col-span-1">
+                <div className="flex-1">
                     <Input
                         name="clientData.houseNumber"
                         type="number"
-                        label="Nº da Casa"
+                        label="Nº"
                         placeholder="000"
                         value={formData.clientData.houseNumber}
                         onChange={onChange}
@@ -77,10 +76,9 @@ export default function ClientForm({
             <Input
                 name="clientData.reference"
                 label="Referência"
-                placeholder="Referência"
+                placeholder="Apto, Casa, Ponto de referência..."
                 value={formData.clientData.reference}
                 onChange={onChange}
             />
-        </FormSection>
-    );
+        </FormSection>);
 }

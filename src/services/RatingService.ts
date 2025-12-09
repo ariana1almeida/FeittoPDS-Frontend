@@ -31,4 +31,9 @@ export class RatingService {
         const res = await api.get(`/ratings/${ratedById}/${ratedUserId}`);
         return res.data as RatingResponse;
     }
+
+    getAllRatingsFromCurrentUser = async (ratedUserId: string | undefined): Promise<RatingResponse[]> => {
+        const res = await api.get(`/ratings/${ratedUserId}`);
+        return res.data as RatingResponse[];
+    }
 }

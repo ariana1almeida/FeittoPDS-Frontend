@@ -1,5 +1,3 @@
-import Header from '../components/common/Header.tsx';
-import Footer from '../components/common/Footer.tsx';
 import {useCallback, useEffect, useState} from "react";
 import type {ServiceEntity} from "../types/ServiceEntity.ts";
 import {ServiceService} from "../services/ServiceService.ts";
@@ -40,7 +38,7 @@ export default function ProviderHomePage() {
         } finally {
             setLoadingServices(false);
         }
-    }, [serviceService]);
+    }, [serviceService, auth.authData?.id]);
 
     const handleOpenProposal = (service: ServiceEntity) => {
         setSelectedService(service);
@@ -69,14 +67,11 @@ export default function ProviderHomePage() {
     };
 
     useEffect(() => {
-        if (services.length === 0) {
-            loadServices();
-        }
-    }, [loadServices, serviceService, services]);
+        loadServices();
+    }, [loadServices]);
 
     return (
         <div className="min-h-screen w-full bg-neutral-light flex flex-col">
-            <Header/>
             <div className="flex-1 px-4 py-6">
 
                 <div className="w-full max-w-2xl mx-auto mt-4">
@@ -136,8 +131,6 @@ export default function ProviderHomePage() {
                 serviceTitle={selectedService?.title}
                 loading={submittingProposal}
             />
-
-            <Footer/>
         </div>
     );
 }

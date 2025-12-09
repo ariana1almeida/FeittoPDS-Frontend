@@ -20,36 +20,41 @@ export default function ProviderForm({
   const professionsSelected = formData.providerData.professions || [];
 
   return (
-      <FormSection title="Dados Profissionais">
+      <FormSection title="Categorias de Serviços:">
           <div className="mb-4">
-              <p className="mb-2 text-sm font-medium text-primary-dark">Profissões <span className="text-status-error">*</span></p>
-              <div className="grid grid-cols-2 gap-2">
+              <p className="mb-2 text-sm font-semibold text-neutral-dark">
+                  Profissões <span className="text-status-error">*</span>
+              </p>
+              <p className="text-sm font-normal text-neutral-medium mb-4">Selecione as áreas em que você atua (pode escolher mais de uma)</p>
+              <div className="flex flex-col gap-3 md:flex-row md:flex-wrap">
                   {getProfessionOptions().map((opt) => {
                       const Icon = PROFESSION_ICONS[opt.value as keyof typeof PROFESSION_ICONS];
                       return (
-                          <div className="flex items-center border-2 border-neutral-medium rounded-lg" key={opt.value}>
-                              <label className="flex items-center gap-2 text-sm text-primary-dark font-bold">
-                                  <input
-                                      type="checkbox"
-                                      name="providerData.professions"
-                                      value={opt.value}
-                                      checked={professionsSelected.includes(opt.value)}
-                                      onChange={onChange}
-                                      className="h-4 w-4 rounded-lg border-neutral-medium accent-accent-yellow cursor-pointer ml-2"
-                                  />
-                                  {Icon ? <Icon size={20} aria-hidden="true" /> : null}
-                                  {opt.label}
-                              </label>
-                          </div>
+                          <label
+                              key={opt.value}
+                              className="flex items-center gap-2 border-2 border-neutral-medium/5 rounded-xl px-4 py-3 cursor-pointer hover:border-neutral-medium/20 transition-colors md:flex-1 md:basis-[calc(33.333%-0.5rem)]"
+                          >
+                              <input
+                                  type="checkbox"
+                                  name="providerData.professions"
+                                  value={opt.value}
+                                  checked={professionsSelected.includes(opt.value)}
+                                  onChange={onChange}
+                                  className="h-4 w-4 rounded border-neutral-medium accent-accent-yellow cursor-pointer"
+                              />
+                              {Icon && <Icon size={18} className="text-neutral-dark" aria-hidden="true" />}
+                              <span className="text-sm font-medium text-neutral-dark">{opt.label}</span>
+                          </label>
                       );
                   })}
               </div>
-          {showValidation && professionsSelected.length === 0 && (
-              <p className="text-status-error text-xs mt-1">Selecione ao menos uma profissão.</p>
-          )}
-        </div>
 
-        <div className="grid grid-cols-2 gap-4">
+              {showValidation && professionsSelected.length === 0 && (
+                  <p className="text-status-error text-xs mt-1">Selecione ao menos uma profissão.</p>
+              )}
+          </div>
+
+        <div className="grid grid-cols-2 gap-4 my-6">
           <CustomSelect
               label="Estado"
               name="state"
