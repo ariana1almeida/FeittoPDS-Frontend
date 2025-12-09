@@ -14,7 +14,6 @@ import ProviderProposalsPage from "./pages/ProviderProposalsPage.tsx";
 import ServiceProposalsPage from "./pages/ServiceProposalsPage.tsx";
 import Header from "./components/common/Header.tsx";
 import Footer from "./components/common/Footer.tsx";
-import './index.css';
 
 export default function App() {
     return (<HashRouter>
